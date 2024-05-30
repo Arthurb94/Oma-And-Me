@@ -18,7 +18,7 @@ MASK_COLOR = (255, 255, 255)  # white
 
 # Function to segmentate image
 def segmentate(file):
-    base_options = python.BaseOptions(model_asset_path='my-flask-api/hair_segmenter.tflite')
+    base_options = python.BaseOptions(model_asset_path='./hair_segmenter.tflite')
     options = vision.ImageSegmenterOptions(base_options=base_options, output_category_mask=True)
 
     with vision.ImageSegmenter.create_from_options(options) as segmenter:
@@ -78,5 +78,5 @@ if __name__ == '__main__':
 
     # input_details = interpreter.get_input_details()
     # output_details = interpreter.get_output_details()
-    model = keras.models.load_model('my-flask-api/models/bald_classifity.h5')
+    model = keras.models.load_model('models/bald_classifity.h5')
     app.run(host='0.0.0.0', debug=True, port=8000)
