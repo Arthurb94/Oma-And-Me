@@ -1,6 +1,5 @@
 tensorflow
-flask
 opencv-python-headless
 mediapipe
 numpy
-# keras
+keras

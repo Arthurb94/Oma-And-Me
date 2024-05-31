@@ -1,13 +1,10 @@
 import cv2
+import json
 import keras
 import numpy as np
 import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
-from flask import Flask, request, jsonify
-
-
-app = Flask(__name__)
 
 # Constants
 DESIRED_HEIGHT = 480
@@ -55,29 +52,18 @@ def predict(image):
     ims = np.reshape(data, (1, 64, 64, 3)) / 255.0
 
     print(ims.shape)
+    model = keras.models.load_model("models/bald_classifity.h5")
     res = model.predict(ims)
 
     return res
 
 
-@app.route("/predict", methods=["POST"])
-def predict_api():
-    if "file" not in request.files:
-        return jsonify({"error": "No file provided"}), 400
+def lambda_handler(event, context):
+    if "file" not in event.files:
+        return json.dumps({"error": "No file provided"}), 400
 
-    file = request.files["file"]
+    file = event.files["file"]
 
     scale, _ = segmentate(file)
 
-    return jsonify({"nordwood_scale": str(scale)})
-
-
-if __name__ == "__main__":
-    # Charger le modèle TFLite
-    # interpreter = tflite.Interpreter(model_path="model.tflite")
-    # interpreter.allocate_tensors()
-
-    # input_details = interpreter.get_input_details()
-    # output_details = interpreter.get_output_details()
-    model = keras.models.load_model("models/bald_classifity.h5")
-    app.run(host="0.0.0.0", debug=True, port=8000)
+    return json.dumps({"nordwood_scale": str(scale)})
