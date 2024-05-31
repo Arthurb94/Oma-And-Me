@@ -1,27 +1,25 @@
-# Utilisez une image de base légère
-FROM python:3.10-slim
+# Utiliser l'image de base officielle Amazon Linux 2 pour AWS Lambda
+FROM public.ecr.aws/lambda/python:3.10
 
-# Installer les dépendances système nécessaires
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    pkg-config \
-    libhdf5-dev \
-    libgl1-mesa-glx \
-    libglib2.0-0 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Installations préliminaires
+RUN yum -y update && \
+    yum -y install unzip wget
 
-# Copier le fichier requirements.txt dans le conteneur
-COPY requirements.txt .
+# Install dependencies for OpenCV
+RUN yum install -y gcc cmake git \
+    libjpeg-turbo libpng libtiff libjasper openexr \
+    gtk2 gtk3 \
+    mesa-libGL mesa-libGL-devel mesa-libGLU mesa-libGLU-devel \
+    libSM libXrender libXext
 
-# Installer les dépendances nécessaires
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python packages
+RUN pip install --upgrade pip
 
-# Copier le reste du code de l'application dans le conteneur
+# Install Python packages, including OpenCV
+RUN pip install opencv-python-headless keras tensorflow numpy mediapipe
+
+# Copy the model files to the container
 COPY . .
 
-# Exposer le port sur lequel l'application s'exécute
-EXPOSE 8000
-
-# Définir la commande pour exécuter l'application
-CMD ["python", "app.py", "--host=0.0.0.0", "--ports=8000"]
+# Command to run the Lambda function handler
+CMD ["lambda_function.lambda_handler"]

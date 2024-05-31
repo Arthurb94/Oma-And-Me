@@ -1,6 +1,7 @@
 import cv2
 import json
 import keras
+import tensorflow as tf
 import numpy as np
 import mediapipe as mp
 from mediapipe.tasks import python
@@ -15,7 +16,7 @@ MASK_COLOR = (255, 255, 255)  # white
 
 # Function to segmentate image
 def segmentate(file):
-    base_options = python.BaseOptions(model_asset_path="./hair_segmenter.tflite")
+    base_options = python.BaseOptions(model_asset_path="hair_segmenter.tflite")
     options = vision.ImageSegmenterOptions(
         base_options=base_options, output_category_mask=True
     )
@@ -59,10 +60,10 @@ def predict(image):
 
 
 def lambda_handler(event, context):
-    if "file" not in event.files:
+    if "file" not in event.keys():
         return json.dumps({"error": "No file provided"}), 400
 
-    file = event.files["file"]
+    file = event["file"]
 
     scale, _ = segmentate(file)
 
