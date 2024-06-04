@@ -1,6 +1,5 @@
 import cv2
 import json
-import keras
 import tensorflow as tf
 import numpy as np
 import mediapipe as mp
@@ -53,18 +52,45 @@ def predict(image):
     ims = np.reshape(data, (1, 64, 64, 3)) / 255.0
 
     print(ims.shape)
-    model = keras.models.load_model("models/bald_classifity.h5")
+    model = tf.keras.models.load_model("models/bald_classifity.h5")
     res = model.predict(ims)
 
     return res
 
 
 def lambda_handler(event, context):
+    print("event", event)
+    print("context", context)
+    return {'statusCode': 200,
+                # 'headers': {
+                #     'Content-Type': 'application/json'
+                # },
+                'body': json.dumps({
+                    'blob': 'blobn'
+                })}
     if "file" not in event.keys():
-        return json.dumps({"error": "No file provided"}), 400
+        return {
+                'statusCode': 400,
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'body': json.dumps({
+                    'error': 'No file provided'
+                })
+            }
 
     file = event["file"]
 
     scale, _ = segmentate(file)
 
-    return json.dumps({"nordwood_scale": str(scale)})
+    return {
+            'statusCode': 200,
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+            'body': json.dumps(
+                {
+                "nordwood_scale": str(scale)
+                }
+            )
+        }

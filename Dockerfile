@@ -1,25 +1,36 @@
-# Utiliser l'image de base officielle Amazon Linux 2 pour AWS Lambda
+# Utiliser une image de base compatible AWS Lambda
 FROM public.ecr.aws/lambda/python:3.10
 
-# Installations préliminaires
-RUN yum -y update && \
-    yum -y install unzip wget
+RUN rm -rf /var/cache/yum \
+    && yum clean all \
+    && yum update -y \
+    && yum install -y \
+    gcc \
+    gcc-c++ \
+    python3-devel \
+    libjpeg-devel \
+    zlib-devel \
+    hdf5 \
+    hdf5-devel \
+    blas-devel \
+    lapack-devel \
+    && yum clean all
 
-# Install dependencies for OpenCV
-RUN yum install -y gcc cmake git \
-    libjpeg-turbo libpng libtiff libjasper openexr \
-    gtk2 gtk3 \
-    mesa-libGL mesa-libGL-devel mesa-libGLU mesa-libGLU-devel \
-    libSM libXrender libXext
+# Copier les fichiers requirements et le script Python
+# COPY requirements.txt .
 
-# Install Python packages
-RUN pip install --upgrade pip
+# Installer les dépendances Python spécifiées dans requirements.txt
+# RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Python packages, including OpenCV
-RUN pip install opencv-python-headless keras tensorflow numpy mediapipe
+# Copier tout le reste du code source
+# COPY . .
 
-# Copy the model files to the container
-COPY . .
+COPY python /app/python
+ENV PYTHONPATH=/app/python
 
-# Command to run the Lambda function handler
+COPY models/bald_classifity.h5 models/bald_classifity.h5
+COPY lambda_function.py .
+COPY hair_segmenter.tflite .
+
+# Définir le point d'entrée de la fonction Lambda
 CMD ["lambda_function.lambda_handler"]
