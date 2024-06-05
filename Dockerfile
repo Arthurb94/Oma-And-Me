@@ -1,36 +1,38 @@
-# Utiliser une image de base compatible AWS Lambda
+# Pull the base image with python 3.8 as a runtime for your Lambda
 FROM public.ecr.aws/lambda/python:3.10
 
-RUN rm -rf /var/cache/yum \
-    && yum clean all \
-    && yum update -y \
-    && yum install -y \
+# Install OS packages for Pillow-SIMD
+RUN yum -y install tar gzip zlib freetype-devel \
     gcc \
-    gcc-c++ \
-    python3-devel \
+    ghostscript \
+    lcms2-devel \
+    libffi-devel \
+    libimagequant-devel \
     libjpeg-devel \
+    libraqm-devel \
+    libtiff-devel \
+    libwebp-devel \
+    make \
+    openjpeg2-devel \
+    rh-python36 \
+    rh-python36-python-virtualenv \
+    sudo \
+    tcl-devel \
+    tk-devel \
+    tkinter \
+    which \
+    xorg-x11-server-Xvfb \
     zlib-devel \
-    hdf5 \
-    hdf5-devel \
-    blas-devel \
-    lapack-devel \
     && yum clean all
 
-# Copier les fichiers requirements et le script Python
-# COPY requirements.txt .
+# Copy the earlier created requirements.txt file to the container
+COPY requirements.txt ./
 
-# Installer les dépendances Python spécifiées dans requirements.txt
-# RUN pip install --no-cache-dir -r requirements.txt
+# Install the python requirements from requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier tout le reste du code source
-# COPY . .
+# Copy the earlier created app.py file to the container
+COPY . ${LAMBDA_TASK_ROOT}
 
-COPY python /app/python
-ENV PYTHONPATH=/app/python
-
-COPY models/bald_classifity.h5 models/bald_classifity.h5
-COPY lambda_function.py .
-COPY hair_segmenter.tflite .
-
-# Définir le point d'entrée de la fonction Lambda
+# Set the CMD to your handler
 CMD ["lambda_function.lambda_handler"]
