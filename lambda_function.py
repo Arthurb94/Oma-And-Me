@@ -62,14 +62,31 @@ def predict(image):
 
 def lambda_handler(event, context):
     # Log pour débogage
+    print(event)
+
+    # Gestion des requêtes OPTIONS pour CORS
+    if event['httpMethod'] == 'OPTIONS':
+        return {
+            'statusCode': 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'OPTIONS,POST',
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Content-Type': 'application/json'
+            },
+            'body': json.dumps('CORS preflight response')
+        }
+
     body = json.loads(event["body"])
     # Vérifier si le fichier est présent dans l'événement
     if "file" not in body.keys():
         return {
             "statusCode": 400,
-            "headers": {"Content-Type": "application/json"},
-            # "body": json.dumps(event),
-            "body": json.dumps({"error": f"No file provided"}),
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            },
+            "body": json.dumps({"error": "No file provided"}),
         }
 
     file = body["file"]
@@ -79,7 +96,10 @@ def lambda_handler(event, context):
         scale, _ = segmentate(file)
         return {
             "statusCode": 200,
-            "headers": {"Content-Type": "application/json"},
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            },
             "body": json.dumps({"nordwood_scale": str(scale)}),
         }
     except Exception as e:
@@ -87,6 +107,9 @@ def lambda_handler(event, context):
         print(f"Error during processing: {e}")
         return {
             "statusCode": 500,
-            "headers": {"Content-Type": "application/json"},
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            },
             "body": json.dumps({"error": "Internal server error", "details": str(e)}),
         }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Request Example</title>
+</head>
+
+<body>
+    <h1>API Request Example</h1>
+    <button id="fetchData">Fetch Data</button>
+    <textarea id="result" rows="10" cols="50"></textarea>
+
+    <script>
+        // Fonction pour faire une requête à une API et afficher la réponse
+        async function fetchApiData() {
+            const resultElement = document.getElementById('result');
+            try {
+                // Afficher un message de chargement pendant la requête
+                resultElement.value = 'Loading...'
+
+                // Modifier l'URL ici pour appeler votre propre API
+                const response = await fetch("https://7ido0wqdd8.execute-api.eu-west-3.amazonaws.com/j/oma", {
+                    method: 'POST', // ou 'POST', 'PUT', etc.
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // Autres en-têtes si nécessaire
+                    },
+                    body: JSON.stringify({data:'lkfjh'}) // Si vous utilisez une méthode qui nécessite un body (POST, PUT, etc.)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                <!-- const data = await response.json(); -->
+
+                // Afficher la réponse dans la zone de texte
+                resultElement.value = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultElement.value = `Error: ${error.message}`;
+            }
+        }
+
+        // Ajouter un écouteur d'événements pour le bouton
+        document.getElementById('fetchData').addEventListener('click', fetchApiData);
+    </script>
+</body>
+
+</html>
