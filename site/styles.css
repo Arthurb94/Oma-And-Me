@@ -21,6 +21,7 @@ body {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    margin-top: 50px;
 }
 
 /* En-têtes */
@@ -34,6 +35,12 @@ h1 {
 
 h2 {
     font-size: 1.5em;
+}
+
+/* Paragraphe */
+p {
+    font-size: 14px;
+    color: #666;
 }
 
 /* Prévisualisation des photos */
@@ -55,24 +62,71 @@ h2 {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Groupe de boutons */
-.button-group {
+/* Exemple de photos */
+.photo-example {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
 }
 
-.button-group button {
+.photo-example img {
+    width: 80%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Groupe de boutons */
+.button-group,
+.gender-selection {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.button-group button,
+.gender-btn,
+.capture-btn,
+.retake-btn,
+.confirm-btn,
+.continue-btn {
     background-color: #4caf50;
     color: white;
     border: none;
     padding: 10px 20px;
-    font-size: 1em;
+    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-    margin: 5px;
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
 }
 
-.button-group button:hover {
+.button-group button:hover,
+.gender-btn:hover,
+.capture-btn:hover,
+.retake-btn:hover,
+.confirm-btn:hover,
+.continue-btn:hover {
     background-color: #45a049;
+}
+
+.retake-btn {
+    background-color: #ff9800;
+}
+
+/* Politique de confidentialité */
+.privacy-policy {
+    font-size: 12px;
+    color: #666;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.privacy-policy a {
+    color: #4caf50;
+    text-decoration: none;
 }
 
 /* Bouton pour basculer entre les vues */
@@ -104,4 +158,11 @@ h2 {
     .photo-preview div {
         flex-basis: 90%;
     }
+}
+
+/* Vidéo */
+video {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
