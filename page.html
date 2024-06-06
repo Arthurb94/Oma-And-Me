@@ -9,52 +9,68 @@
 
 <body>
     <h1>API Request Example</h1>
-    <input type="file" id="fileInput" accept="image/png">
+    <video id="video" width="320" height="240" autoplay></video>
+    <button id="capture">Capture Image</button>
     <button id="fetchData">Fetch Data</button>
     <textarea id="result" rows="10" cols="50"></textarea>
 
     <script>
-        async function fetchApiData() {
-            const resultElement = document.getElementById('result');
-            const fileInput = document.getElementById('fileInput');
-
-            if (fileInput.files.length === 0) {
-                resultElement.value = 'No file selected!';
-                return;
-            }
-
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-
-            reader.onload = async function(event) {
-                const base64Image = event.target.result.split(',')[1];
-                
-                try {
-                    resultElement.value = 'Loading...';
-
-                    const response = await fetch("https://tv1wdm122i.execute-api.eu-west-3.amazonaws.com/default/oma", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ file: base64Image })
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}, ${response.statusText}`);
-                    }
-
-                    const data = await response.json();
-                    resultElement.value = JSON.stringify(data, null, 2);
-                } catch (error) {
-                    resultElement.value = `Error: ${error.message}`;
-                }
-            };
-
-            reader.readAsDataURL(file);
+        // Access the camera and display the video feed
+        async function startCamera() {
+            const video = document.getElementById('video');
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
         }
 
-        document.getElementById('fetchData').addEventListener('click', fetchApiData);
+        // Capture an image from the video feed
+        function captureImage() {
+            const video = document.getElementById('video');
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            return canvas.toDataURL('image/png');
+        }
+
+        // Function to make a request to an API and display the response
+        async function fetchApiData(base64Image) {
+            const resultElement = document.getElementById('result');
+
+            try {
+                // Display a loading message during the request
+                resultElement.value = 'Loading...';
+
+                // Modify the URL here to call your own API
+                const response = await fetch("https://tv1wdm122i.execute-api.eu-west-3.amazonaws.com/default/oma", {
+                    method: 'POST', // or 'POST', 'PUT', etc.
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ file: base64Image })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}, ${response.text}`);
+                }
+
+                const data = await response.json();
+
+                // Display the response in the text area
+                resultElement.value = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultElement.value = `Error: ${error.message}`;
+            }
+        }
+
+        // Event listeners for the buttons
+        document.getElementById('capture').addEventListener('click', () => {
+            const base64Image = captureImage().split(',')[1];
+            fetchApiData(base64Image);
+        });
+
+        // Start the camera on page load
+        window.addEventListener('load', startCamera);
     </script>
 </body>
 
