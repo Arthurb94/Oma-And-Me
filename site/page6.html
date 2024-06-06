@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        .photo-preview {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .photo-preview img {
+            width: 45%;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        .button-group button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Review Your Photos</h1>
+        <div class="photo-preview">
+            <div>
+                <h2>Front View</h2>
+                <img id="frontViewPreview" src="" alt="Front View Photo">
+            </div>
+            <div>
+                <h2>Top View</h2>
+                <img id="topViewPreview" src="" alt="Top View Photo">
+            </div>
+        </div>
+        <div class="button-group">
+            <button onclick="retakePhoto('front')">Retake Front View</button>
+            <button onclick="retakePhoto('top')">Retake Top View</button>
+        </div>
+        <div class="button-group">
+            <button onclick="sendPhotos()">Send Photos</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('frontViewPreview').src = localStorage.getItem('frontViewPhoto');
+        document.getElementById('topViewPreview').src = localStorage.getItem('topViewPhoto');
+
+        function retakePhoto(view) {
+            if (view === 'front') {
+                window.location.href = 'page3.html';
+            } else if (view === 'top') {
+                window.location.href = 'page4.html';
+            }
+        }
+
+        function sendPhotos() {
+            const frontViewPhoto = localStorage.getItem('frontViewPhoto');
+            const topViewPhoto = localStorage.getItem('topViewPhoto');
+            
+            fetch('https://your-server-endpoint.com/upload', {
+                method: 'POST',
+                body: JSON.stringify({
+                    frontViewPhoto: frontViewPhoto,
+                    topViewPhoto: topViewPhoto
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Clear photos from localStorage after sending
+                localStorage.removeItem('frontViewPhoto');
+                localStorage.removeItem('topViewPhoto');
+                // Redirect to a success page or display a success message
+                window.location.href = 'success.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
