@@ -27,6 +27,9 @@ RUN yum -y install tar gzip zlib freetype-devel \
 
 # Copy the earlier created requirements.txt file to the container
 COPY requirements.txt ./
+COPY h5py-3.11.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl .
+
+RUN pip install h5py-3.11.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
 
 # Install the python requirements from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt

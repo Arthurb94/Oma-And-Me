@@ -1,1 +1,0 @@
-{"error": "Internal server error", "details": "Object of type int64 is not JSON serializable"}

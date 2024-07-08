@@ -5,7 +5,8 @@ import base64
 url = "https://tv1wdm122i.execute-api.eu-west-3.amazonaws.com/default/oma"
 
 # Chemin vers l'image PNG que vous souhaitez envoyer
-image_path = "test_data/4.png"
+# image_path = "test_data/4.png"
+image_path = "training/datasets/hair_norwood_hamilton-1/train/6/20231102123718HfjxlX_gauss_jpg.rf.c581bbd43daf80c55fcdd5c613c18506.jpg"
 
 with open(image_path, "rb") as image_file:
     image_data = image_file.read()
