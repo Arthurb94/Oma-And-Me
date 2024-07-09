@@ -10,17 +10,13 @@
     <div class="container">
         <h1>API Results</h1>
         <h2>Front View</h2>
-        <textarea id="frontResult" readonly></textarea>
-        <!-- <h2>Top View</h2>
-        <textarea id="topResult" readonly></textarea> -->
+        <textarea id="Result" readonly></textarea>
     </div>
     <script>
-        document.getElementById('frontResult').value = localStorage.getItem('frontResult') || 'No data';
-        // document.getElementById('topResult').value = localStorage.getItem('topResult') || 'No data';
+        document.getElementById('Result').value = localStorage.getItem('Result') || 'No data';
         
         // Clear results from localStorage after displaying
-        localStorage.removeItem('frontResult');
-        // localStorage.removeItem('topResult');
+        localStorage.removeItem('Result');
     </script>
 </body>
 </html>
