@@ -56,8 +56,11 @@
                 const data = await response.json();
 
                 // Store the result in local storage
-                localStorage.setItem(`${viewType}Result`, JSON.stringify(data));
-
+                localStorage.setItem('Result', JSON.stringify(data));
+                window.location.href = 'results.html';
+            }
+            catch (error) {
+                localStorage.setItem('Result', `Error: ${error.message}`);
                 window.location.href = 'results.html';
             }
         }
