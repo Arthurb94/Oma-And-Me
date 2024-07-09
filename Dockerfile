@@ -1,19 +1,27 @@
 # Utiliser une image de base compatible AWS Lambda
 FROM public.ecr.aws/lambda/python:3.10
 
-RUN rm -rf /var/cache/yum \
-    && yum clean all \
-    && yum update -y \
-    && yum install -y \
+RUN yum -y install tar gzip zlib freetype-devel \
     gcc \
-    gcc-c++ \
-    python3-devel \
+    ghostscript \
+    lcms2-devel \
+    libffi-devel \
+    libimagequant-devel \
     libjpeg-devel \
+    libraqm-devel \
+    libtiff-devel \
+    libwebp-devel \
+    make \
+    openjpeg2-devel \
+    rh-python36 \
+    rh-python36-python-virtualenv \
+    sudo \
+    tcl-devel \
+    tk-devel \
+    tkinter \
+    which \
+    xorg-x11-server-Xvfb \
     zlib-devel \
-    hdf5 \
-    hdf5-devel \
-    blas-devel \
-    lapack-devel \
     && yum clean all
 
 # Copier les fichiers requirements et le script Python

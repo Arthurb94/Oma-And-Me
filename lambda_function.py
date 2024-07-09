@@ -52,7 +52,7 @@ def predict_image(file):
     decoded_image = base64.b64decode(file)
     img_np = np.frombuffer(decoded_image, np.uint8)
     image = cv2.imdecode(img_np, cv2.IMREAD_COLOR)
-    image = cv2.resize(image, target_size=(224, 224))
+    image = cv2.resize(image, (224, 224))
     image_array = img_to_array(image) / 255.0
     img_array = np.expand_dims(image_array, axis=0)
 
@@ -94,6 +94,7 @@ def lambda_handler(event, context):
         }
 
     body = json.loads(event["body"])
+
     # Vérifier si le fichier est présent dans l'événement
     if "file_front" not in body.keys() or "file_top" not in body.keys():
         return {
@@ -110,16 +111,25 @@ def lambda_handler(event, context):
 
     # Appeler la fonction segmentate et traiter l'image
     try:
+        print("front pic")
         scale, _ = segmentate(file_front)
-        _, scale2 = predict_image(file_top)
+        print("scale: ", scale)
 
+        print("top pic")
+        scale2, _ = predict_image(file_top)
+        print("scale:", scale2)
+
+        print("final scale:")
         final_scale = round((scale + scale2) / 2)
+        print(final_scale)
 
         return {
             "statusCode": 200,
             "headers": {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST",
+                "Access-Control-Allow-Headers": "Content-Type",
             },
             "body": json.dumps({"nordwood_scale": str(final_scale)}),
         }
