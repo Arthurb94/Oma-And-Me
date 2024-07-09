@@ -2,16 +2,11 @@ import tensorflow as tf
 import numpy as np
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
-# Chemin vers le modèle sauvegardé
-model_path = "final_model.keras"
-
-# Chargement du modèle
-model = tf.keras.models.load_model(model_path)
-
 
 # Fonction pour faire de l'inférence sur une seule image
-def predict_image(image_path, model):
+def predict_image(image_path):
     # Charger et prétraiter l'image
+    model = tf.keras.models.load_model("models/final_model.keras")
     img = load_img(image_path, target_size=(224, 224))
     img_array = img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)  # Ajouter une dimension pour le batch
@@ -26,7 +21,7 @@ def predict_image(image_path, model):
 
 # Exemple d'utilisation
 image_path = "training/datasets/hair_norwood_hamilton-1/test/6/20231224094540Ln5VZt_rgbshift_jpg.rf.126bb810c66904a4d298e9cd2fa4a512.jpg"
-predicted_class, scores = predict_image(image_path, model)
+predicted_class, scores = predict_image(image_path)
 
 print(f"Predicted class: {predicted_class}")
 print(f"Scores: {scores}")

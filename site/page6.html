@@ -39,18 +39,18 @@
             }
         }
 
-        async function fetchApiData(base64Image, viewType) {
+        async function fetchApiData(frontViewPhoto, topViewPhoto) {
             try {
                 const response = await fetch("https://tv1wdm122i.execute-api.eu-west-3.amazonaws.com/default/oma", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ file: base64Image.split(',')[1]})
+                    body: JSON.stringify({ file_front: frontViewPhoto.split(',')[1], file_top: topViewPhoto.split(',')[1]})
                 });
 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}, ${response.text},${base64Image}`);
+                    throw new Error(`HTTP error! Status: ${response.status}, ${response.text},${frontViewPhoto},${topViewPhoto}`);
                 }
 
                 const data = await response.json();
@@ -58,22 +58,15 @@
                 // Store the result in local storage
                 localStorage.setItem(`${viewType}Result`, JSON.stringify(data));
 
-                // Redirect to the results page
-                if (viewType === 'front') {
-                    window.location.href = 'results.html';
-                }
-            } catch (error) {
-                localStorage.setItem(`${viewType}Result`, `Error: ${error.message}`);
-                if (viewType === 'front') {
-                    window.location.href = 'results.html';
-                }
+                window.location.href = 'results.html';
             }
         }
 
         function sendPhotos() {
             const frontViewPhoto = localStorage.getItem('frontViewPhoto');
+            const topViewPhoto = localStorage.getItem('topViewPhoto');
 
-            fetchApiData(frontViewPhoto, 'front');
+            fetchApiData(frontViewPhoto, topViewPhoto);
         }
     </script>
 </body>

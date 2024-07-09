@@ -6,6 +6,7 @@ import mediapipe as mp
 import tensorflow as tf
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
+from tensorflow.keras.preprocessing.image import img_to_array
 
 # Constants
 DESIRED_HEIGHT = 480
@@ -47,13 +48,28 @@ def segmentate(file):
         return scale, output_image
 
 
+def predict_image(file):
+    decoded_image = base64.b64decode(file)
+    img_np = np.frombuffer(decoded_image, np.uint8)
+    image = cv2.imdecode(img_np, cv2.IMREAD_COLOR)
+    image = cv2.resize(image, target_size=(224, 224))
+    image_array = img_to_array(image) / 255.0
+    img_array = np.expand_dims(image_array, axis=0)
+
+    model = tf.keras.models.load_model("models/final_model.keras")
+
+    predictions = model.predict(img_array)
+    predicted_class = np.argmax(predictions[0])
+
+    return predicted_class + 1, predictions[0]
+
+
 def predict(image):
     # Redimensionner et normaliser l'image
     data = cv2.resize(image, (64, 64))
     data = cv2.cvtColor(data, cv2.COLOR_BGR2RGB)
     ims = np.reshape(data, (1, 64, 64, 3)) / 255.0
 
-    print(ims.shape)
     model = tf.keras.models.load_model("models/bald_classifity.h5")
     res = model.predict(ims)
 
@@ -65,42 +81,47 @@ def lambda_handler(event, context):
     print(event)
 
     # Gestion des requêtes OPTIONS pour CORS
-    if event['httpMethod'] == 'OPTIONS':
+    if event["httpMethod"] == "OPTIONS":
         return {
-            'statusCode': 200,
-            'headers': {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'OPTIONS,POST',
-                'Access-Control-Allow-Headers': 'Content-Type',
-                'Content-Type': 'application/json'
+            "statusCode": 200,
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Content-Type": "application/json",
             },
-            'body': json.dumps('CORS preflight response')
+            "body": json.dumps("CORS preflight response"),
         }
 
     body = json.loads(event["body"])
     # Vérifier si le fichier est présent dans l'événement
-    if "file" not in body.keys():
+    if "file_front" not in body.keys() or "file_top" not in body.keys():
         return {
             "statusCode": 400,
             "headers": {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
             },
             "body": json.dumps({"error": "No file provided"}),
         }
 
-    file = body["file"]
+    file_front = body["file_front"]
+    file_top = body["file_top"]
 
     # Appeler la fonction segmentate et traiter l'image
     try:
-        scale, _ = segmentate(file)
+        scale, _ = segmentate(file_front)
+        _, scale2 = predict_image(file_top)
+
+        final_scale = round((scale + scale2) / 2)
+
         return {
             "statusCode": 200,
             "headers": {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
             },
-            "body": json.dumps({"nordwood_scale": str(scale)}),
+            "body": json.dumps({"nordwood_scale": str(final_scale)}),
         }
     except Exception as e:
         # Gérer les exceptions et log pour débogage
@@ -109,7 +130,7 @@ def lambda_handler(event, context):
             "statusCode": 500,
             "headers": {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
             },
             "body": json.dumps({"error": "Internal server error", "details": str(e)}),
         }

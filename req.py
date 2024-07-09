@@ -11,7 +11,7 @@ image_path = "training/datasets/hair_norwood_hamilton-1/train/6/20231102123718Hf
 with open(image_path, "rb") as image_file:
     image_data = image_file.read()
     encoded_image = base64.b64encode(image_data).decode("utf-8")
-    payload = {"file": encoded_image}
+    payload = {"file_": encoded_image}
 
 # Envoyer la requête POST avec les données de l'image
 response = requests.post(url, json=payload)

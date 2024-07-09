@@ -1,41 +1,34 @@
-# Pull the base image with python 3.8 as a runtime for your Lambda
+# Utiliser une image de base compatible AWS Lambda
 FROM public.ecr.aws/lambda/python:3.10
 
-# Install OS packages for Pillow-SIMD
-RUN yum -y install tar gzip zlib freetype-devel \
+RUN rm -rf /var/cache/yum \
+    && yum clean all \
+    && yum update -y \
+    && yum install -y \
     gcc \
-    ghostscript \
-    lcms2-devel \
-    libffi-devel \
-    libimagequant-devel \
+    gcc-c++ \
+    python3-devel \
     libjpeg-devel \
-    libraqm-devel \
-    libtiff-devel \
-    libwebp-devel \
-    make \
-    openjpeg2-devel \
-    rh-python36 \
-    rh-python36-python-virtualenv \
-    sudo \
-    tcl-devel \
-    tk-devel \
-    tkinter \
-    which \
-    xorg-x11-server-Xvfb \
     zlib-devel \
+    hdf5 \
+    hdf5-devel \
+    blas-devel \
+    lapack-devel \
     && yum clean all
 
-# Copy the earlier created requirements.txt file to the container
-COPY requirements.txt ./
-COPY h5py-3.11.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl .
+# Copier les fichiers requirements et le script Python
+COPY requirements.txt .
 
-RUN pip install h5py-3.11.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
-
-# Install the python requirements from requirements.txt
+# Installer les dépendances Python spécifiées dans requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the earlier created app.py file to the container
-COPY . ${LAMBDA_TASK_ROOT}
+# COPY python /app/python
+# ENV PYTHONPATH=/app/python
 
-# Set the CMD to your handler
+COPY models/bald_classifity.h5 models/bald_classifity.h5
+COPY models/final_model.keras models/final_model.keras
+COPY lambda_function.py .
+COPY hair_segmenter.tflite .
+
+# Définir le point d'entrée de la fonction Lambda
 CMD ["lambda_function.lambda_handler"]
