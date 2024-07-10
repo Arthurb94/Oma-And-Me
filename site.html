@@ -378,8 +378,8 @@
 
                 // Store the result in local storage
                 localStorage.setItem('result',JSON.stringify(data));
-                navigateTo('page12');
                 displayResults();
+                navigateTo('page12');
             } catch (error) {
                 localStorage.setItem('result', 'Error: ${error.message}');
                 navigateTo('page12');
