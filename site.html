@@ -180,7 +180,7 @@
         <div class="container">
             <h1>API Results</h1>
             <h2>Front View</h2>
-            <textarea id="frontResult" readonly></textarea>
+            <textarea id="result" readonly></textarea>
         </div>
     </div>
 
@@ -352,14 +352,8 @@
         function sendPhotos() {
             navigateTo('page11');
             const frontViewPhoto = capturedPhotos.front;
-            localStorage.setItem('currentPhoto', frontViewPhoto);
-            localStorage.setItem('currentViewType', 'front');
-            fetchApiData(frontViewPhoto, 'front');
-
             const topViewPhoto = capturedPhotos.top;
-            localStorage.setItem('currentPhoto', topViewPhoto);
-            localStorage.setItem('currentViewType', 'top');
-            fetchApiData(topViewPhoto, 'top');
+            fetchApiData(frontViewPhoto, topViewPhoto);
         }
 
 
@@ -385,6 +379,7 @@
                 // Store the result in local storage
                 localStorage.setItem('result',JSON.stringify(data));
                 navigateTo('page12');
+                displayResults();
             } catch (error) {
                 localStorage.setItem('result', 'Error: ${error.message}');
                 navigateTo('page12');
