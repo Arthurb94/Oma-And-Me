@@ -120,7 +120,7 @@ def lambda_handler(event, context):
         print("scale:", scale2)
 
         print("final scale:")
-        final_scale = round((scale + scale2) / 2)
+        final_scale = round((scale * 2 + scale2) / 2)
         print(final_scale)
 
         return {
