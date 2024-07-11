@@ -382,6 +382,7 @@
                 navigateTo('page12');
             } catch (error) {
                 localStorage.setItem('result', 'Error: ${error.message}');
+                displayResults();
                 navigateTo('page12');
             }
         }
