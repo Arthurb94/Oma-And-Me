@@ -10,21 +10,38 @@
     <!-- Page 1: Select Gender -->
     <div id="page1" class="page">
       <div class="container">
-        <h1>Select Your Gender</h1>
+        <div class="progress-container">
+          <div class="progress-step completed"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+        </div>
+
+        <h1>INFORMATIONS</h1>
         <p>
-          Please select your gender and accept our Privacy Policy to continue.
+          <b>
+            Afin de vous fournir une analyse pertinente, nous vous demandons de
+            bien vouloir indiquer votre sexe
+          </b>
         </p>
         <div class="gender-selection">
-          <button class="gender-btn" onclick="selectGender('male')">
-            Male
+          <p><b>Vous êtes:</b></p>
+          <button class="gender-btn selected" onclick="selectGender('male')">
+            UN HOMME
           </button>
           <button class="gender-btn" onclick="selectGender('female')">
-            Female
+            UNE FEMME
           </button>
         </div>
+        <p>
+          <b>
+            Cette information est cruciale pour assurer la précision de
+            l'analyse
+          </b>
+        </p>
         <p class="privacy-policy">
           By continuing, you agree to our
-          <a href="privacy-policy.html">Privacy Policy</a>.
+          <a href="privacy-policy.html">Privacy Policy</a>
         </p>
       </div>
     </div>
@@ -32,16 +49,29 @@
     <!-- Page 2: Photo Instructions (Front View) -->
     <div id="page2" class="page" style="display: none">
       <div class="container">
-        <h1>Photo Instructions</h1>
+        <div class="progress-container">
+          <div class="progress-step completed"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+        </div>
+        <h1>PRENEZ DES PHOTOS</h1>
         <p>
-          Please follow the examples below to take clear and accurate photos.
+          <b>
+            Utilisez votre appareil photo pour prendre des photos nettes de vos
+            cheveux
+          </b>
         </p>
         <div class="photo-example">
-          <h2>Front View</h2>
-          <img src="front-view-example.jpg" alt="Front View Example" />
+          <div class="photo-grid">
+            <img src="path/to/photo1.jpg" alt="Photo 1" class="photo" />
+            <img src="path/to/photo2.jpg" alt="Photo 2" class="photo" />
+            <img src="path/to/photo3.jpg" alt="Photo 3" class="photo" />
+            <img src="path/to/photo4.jpg" alt="Photo 4" class="photo" />
+          </div>
         </div>
         <button class="continue-btn" onclick="navigateTo('page3')">
-          Continue
+          COMMENCER
         </button>
       </div>
     </div>
@@ -317,7 +347,19 @@
       function navigateTo(pageId) {
         const pages = document.querySelectorAll(".page");
         pages.forEach((page) => (page.style.display = "none"));
-        document.getElementById(pageId).style.display = "block";
+        document.getElementById(pageId).style.display = "flex";
+
+        // Mettre à jour les étapes de progression
+        const pageIndex = Array.from(pages).findIndex(
+          (page) => page.id === pageId
+        );
+        steps.forEach((step, index) => {
+          if (index <= pageIndex) {
+            step.classList.add("completed");
+          } else {
+            step.classList.remove("completed");
+          }
+        });
       }
 
       // Gender selection logic
@@ -577,6 +619,18 @@
           document.getElementById("result").value = result;
           localStorage.removeItem("result");
         }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        navigateTo("page1"); // Initialiser sur la première page
+
+        const buttons = document.querySelectorAll(".gender-btn");
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            buttons.forEach((btn) => btn.classList.remove("selected"));
+            button.classList.add("selected");
+          });
+        });
       });
     </script>
   </body>

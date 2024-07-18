@@ -1,5 +1,5 @@
 /* Global styles */
-body, h1, p, button {
+body, h1, button {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
@@ -7,9 +7,14 @@ body, h1, p, button {
     color: #333;
 }
 
+p {
+    margin: 0;
+    padding: 0;
+    font-style: bold;
+}
 
 body {
-    background-color: #f4f4f4;
+    background-color: white;
     text-align: center;
 }
 
@@ -33,29 +38,58 @@ body {
     width: 100%;
 }
 
+.progress-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f1f1f1;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-step {
+    width: 100px;
+    height: 10px;
+    background-color: lightgray;
+    color: black;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.progress-step.completed {
+    background-color: black;
+    color: white;
+}
+
 
 /* Gender selection */
 .gender-selection {
     display: flex;
+    text-align: left;
     justify-content: space-around;
     margin: 1em 0;
 }
 
 
 .gender-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5em 1em;
-    font-size: 1em;
-    border-radius: 5px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin: 5px;
 }
 
-
 .gender-btn:hover {
-    background-color: #0056b3;
+    background-color: black;
+    color: white;
 }
 
 
@@ -90,7 +124,18 @@ body {
 
 
 /* Buttons */
-.continue-btn,
+.continue-btn {
+    width: 100%;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+
 .capture-btn,
 .retake-btn,
 .confirm-btn {
@@ -105,8 +150,6 @@ body {
     margin-top: 1em;
 }
 
-
-.continue-btn:hover,
 .capture-btn:hover,
 .retake-btn:hover,
 .confirm-btn:hover {
