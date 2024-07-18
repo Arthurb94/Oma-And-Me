@@ -7,15 +7,15 @@
     <title>Combined Application</title>
   </head>
   <body>
+    <div class="progress-container">
+      <div class="progress-step"></div>
+      <div class="progress-step"></div>
+      <div class="progress-step"></div>
+      <div class="progress-step"></div>
+    </div>
     <!-- Page 1: Select Gender -->
     <div id="page1" class="page">
       <div class="container">
-        <div class="progress-container">
-          <div class="progress-step completed"></div>
-          <div class="progress-step"></div>
-          <div class="progress-step"></div>
-          <div class="progress-step"></div>
-        </div>
 
         <h1>INFORMATIONS</h1>
         <p>
@@ -50,7 +50,7 @@
     <div id="page2" class="page" style="display: none">
       <div class="container">
         <div class="progress-container">
-          <div class="progress-step completed"></div>
+          <div class="progress-step "></div>
           <div class="progress-step"></div>
           <div class="progress-step"></div>
           <div class="progress-step"></div>
@@ -346,6 +346,8 @@
       // Navigation logic
       function navigateTo(pageId) {
         const pages = document.querySelectorAll(".page");
+        const steps = document.querySelectorAll('.progress-step');
+
         pages.forEach((page) => (page.style.display = "none"));
         document.getElementById(pageId).style.display = "flex";
 
