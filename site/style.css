@@ -67,6 +67,19 @@ body {
     color: white;
 }
 
+.photo-container {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black; /* Encadrer la photo avec une bordure noire */
+    max-width: 300px; /* Largeur maximale du conteneur */
+    margin: 0 auto; /* Centrer le conteneur horizontalement */
+    margin-bottom: 0;
+}
+.photo {
+    max-width: 100%; /* Assurer que la photo ne dépasse pas la largeur du conteneur */
+    height: auto; /* Maintenir le ratio de la photo */
+}
 
 /* Gender selection */
 .gender-selection {
@@ -118,13 +131,20 @@ body {
 
 
 .photo-example img {
-    max-width: 100%;
+    max-width: 45%;
     border-radius: 10px;
 }
 
+.icon {
+    width: 24px;
+    height: 24px;
+}
 
 /* Buttons */
-.continue-btn {
+.continue-btn,
+.capture-btn,
+.retake-btn,
+.confirm-btn {
     width: 100%;
     background-color: black;
     color: white;
@@ -133,27 +153,8 @@ body {
     font-size: 16px;
     cursor: pointer;
     margin: 5px;
-}
-
-
-.capture-btn,
-.retake-btn,
-.confirm-btn {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 0.5em 1em;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 1em;
-}
-
-.capture-btn:hover,
-.retake-btn:hover,
-.confirm-btn:hover {
-    background-color: #218838;
+    justify-content: center;
+    align-items: center;
 }
 
 
