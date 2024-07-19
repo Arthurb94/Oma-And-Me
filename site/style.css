@@ -52,7 +52,7 @@ body {
 }
 
 .progress-step {
-    width: 100px;
+    width: 22%;
     height: 10px;
     background-color: lightgray;
     color: black;
@@ -73,8 +73,10 @@ body {
     align-items: center;
     border: 1px solid black; /* Encadrer la photo avec une bordure noire */
     max-width: 300px; /* Largeur maximale du conteneur */
+    max-height: 325px;
     margin: 0 auto; /* Centrer le conteneur horizontalement */
-    margin-bottom: 0;
+    margin-bottom: 12px;
+    margin-top: 12px;
 }
 .photo {
     max-width: 100%; /* Assurer que la photo ne dépasse pas la largeur du conteneur */
