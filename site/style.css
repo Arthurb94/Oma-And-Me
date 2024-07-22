@@ -85,7 +85,7 @@ body {
 
 /* Gender selection */
 .gender-selection {
-    display: flex;
+    /* display: flex; */
     text-align: left;
     justify-content: space-around;
     margin: 1em 0;
@@ -100,6 +100,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     margin: 5px;
+    width: 100%;
 }
 
 .gender-btn:hover {
@@ -162,9 +163,40 @@ body {
 
 video {
     width: 100%;
+    height: 100%;
     border-radius: 10px;
     margin: 1em 0;
 }
+
+/* .container.video {
+    width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        margin: 1em 0;
+} */
+.video-container {
+  position: relative;
+  width: 100%;
+  /* max-width: 600px; Ajuster selon les besoins */
+  margin: 0 auto;
+}
+
+#videoFront {
+  width: 100%;
+  height: auto; /* Assure que la hauteur est proportionnelle à la largeur */
+}
+
+.overlay-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5; /* Ajuster l'opacité selon les besoins */
+  pointer-events: none; /* Assure que l'image ne gêne pas les contrôles de la vidéo */
+  object-fit: cover; /* Assure que l'image couvre tout l'élément sans déformation */
+}
+
 
 
 /* Photo preview */
