@@ -379,7 +379,7 @@
     <div id="page4" class="page" style="display: none">
       <div class="container video">
         <div class="video-container">
-          <video id="videoFront" autoplay></video>
+          <video id="videoFront" autoplay playsinline></video>
           <canvas id="canvasFront" style="display: none"></canvas>
           <img
             src="assets/overlay-image-front-top.png"
@@ -445,7 +445,15 @@
     <!-- Page 6: Take Top View Photo -->
     <div id="page6" class="page" style="display: none">
       <div class="container">
-        <video id="videoTop" autoplay style="display: none"></video>
+        <div class="video-container">
+          <video id="videoTop" autoplay playsinline></video>
+          <canvas id="canvasTop" style="display: none"></canvas>
+          <img
+            src="assets/overlay-image-front-top.png"
+            class="overlay-image"
+            alt="Overlay Image"
+          />
+        </div>
         <button
           id="captureBtnTop"
           class="capture-btn"
@@ -507,7 +515,15 @@
     <!-- Page 8: Take Right View Photo -->
     <div id="page8" class="page" style="display: none">
       <div class="container">
-        <video id="videoRight" autoplay style="display: none"></video>
+        <div class="video-container">
+          <video id="videoRight" autoplay playsinline></video>
+          <canvas id="canvasRight" style="display: none"></canvas>
+          <img
+            src="assets/overlay-image-right-left.png"
+            class="overlay-image"
+            alt="Overlay Image"
+          />
+        </div>
         <button
           id="captureBtnRight"
           class="capture-btn"
@@ -569,7 +585,15 @@
     <!-- Page 10: Take Left View Photo -->
     <div id="page10" class="page" style="display: none">
       <div class="container">
-        <video id="videoLeft" autoplay style="display: none"></video>
+        <div class="video-container">
+          <video id="videoLeft" autoplay playsinline></video>
+          <canvas id="canvasLeft" style="display: none"></canvas>
+          <img
+            src="assets/overlay-image-right-left.png"
+            class="overlay-image"
+            alt="Overlay Image"
+          />
+        </div>
         <button
           id="captureBtnLeft"
           class="capture-btn"
