@@ -9,305 +9,288 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <title>Combined Application</title>
-  </head>
-  <body>
     <style>
       /* Global styles */
-body, h1, button {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333;
-}
+      body,
+      h1,
+      button {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
 
-p {
-    margin: 0;
-    padding: 0;
-    font-style: bold;
-}
+      p {
+        margin: 0;
+        padding: 0;
+        font-style: bold;
+      }
 
-body {
-    background-color: white;
-    text-align: center;
-}
+      body {
+        background-color: white;
+        text-align: center;
+      }
 
+      /* Container */
+      .page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 0 1em; /* Add padding to avoid cutting off content on small screens */
+      }
 
-/* Container */
-.page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 0 1em; /* Add padding to avoid cutting off content on small screens */
-}
+      .container {
+        background: white;
+        padding: 2em;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+      }
 
+      .progress-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #f1f1f1;
+        padding: 10px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
 
-.container {
-    background: white;
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
-}
+      .progress-step {
+        width: 22%;
+        height: 10px;
+        background-color: lightgray;
+        color: black;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+      }
 
-.progress-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #f1f1f1;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+      .progress-step.completed {
+        background-color: black;
+        color: white;
+      }
 
-.progress-step {
-    width: 22%;
-    height: 10px;
-    background-color: lightgray;
-    color: black;
-    text-align: center;
-    line-height: 30px;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
+      .photo-container {
+        /* display: flex; */
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black; /* Encadrer la photo avec une bordure noire */
+        max-width: 300px; /* Largeur maximale du conteneur */
+        max-height: 325px;
+        margin: 0 auto; /* Centrer le conteneur horizontalement */
+        margin-bottom: 12px;
+        margin-top: 12px;
+      }
+      .photo {
+        max-width: 100%; /* Assurer que la photo ne dépasse pas la largeur du conteneur */
+        height: auto; /* Maintenir le ratio de la photo */
+      }
 
-.progress-step.completed {
-    background-color: black;
-    color: white;
-}
+      /* Gender selection */
+      .gender-selection {
+        /* display: flex; */
+        text-align: left;
+        justify-content: space-around;
+        margin: 1em 0;
+      }
 
-.photo-container {
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black; /* Encadrer la photo avec une bordure noire */
-    max-width: 300px; /* Largeur maximale du conteneur */
-    max-height: 325px;
-    margin: 0 auto; /* Centrer le conteneur horizontalement */
-    margin-bottom: 12px;
-    margin-top: 12px;
-}
-.photo {
-    max-width: 100%; /* Assurer que la photo ne dépasse pas la largeur du conteneur */
-    height: auto; /* Maintenir le ratio de la photo */
-}
+      .gender-btn {
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 5px;
+        width: 100%;
+      }
 
-/* Gender selection */
-.gender-selection {
-    /* display: flex; */
-    text-align: left;
-    justify-content: space-around;
-    margin: 1em 0;
-}
+      .gender-btn:hover {
+        background-color: black;
+        color: white;
+      }
 
+      /* Privacy policy */
+      .privacy-policy {
+        font-size: 0.8em;
+        margin-top: 1em;
+      }
 
-.gender-btn {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 5px;
-    width: 100%;
-}
+      .privacy-policy a {
+        color: #007bff;
+        text-decoration: none;
+      }
 
-.gender-btn:hover {
-    background-color: black;
-    color: white;
-}
+      .privacy-policy a:hover {
+        text-decoration: underline;
+      }
 
+      /* Photo example */
+      .photo-example {
+        margin: 1em 0;
+      }
 
-/* Privacy policy */
-.privacy-policy {
-    font-size: 0.8em;
-    margin-top: 1em;
-}
+      .photo-example img {
+        max-width: 45%;
+        border-radius: 10px;
+      }
 
+      .icon {
+        width: 24px;
+        height: 24px;
+      }
 
-.privacy-policy a {
-    color: #007bff;
-    text-decoration: none;
-}
+      /* Buttons */
+      .continue-btn,
+      .capture-btn,
+      .retake-btn,
+      .confirm-btn {
+        width: 100%;
+        background-color: black;
+        color: white;
+        border: 1px solid black;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 5px;
+        justify-content: center;
+        align-items: center;
+      }
 
+      video {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        margin: 1em 0;
+      }
 
-.privacy-policy a:hover {
-    text-decoration: underline;
-}
-
-
-/* Photo example */
-.photo-example {
-    margin: 1em 0;
-}
-
-
-.photo-example img {
-    max-width: 45%;
-    border-radius: 10px;
-}
-
-.icon {
-    width: 24px;
-    height: 24px;
-}
-
-/* Buttons */
-.continue-btn,
-.capture-btn,
-.retake-btn,
-.confirm-btn {
-    width: 100%;
-    background-color: black;
-    color: white;
-    border: 1px solid black;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 5px;
-    justify-content: center;
-    align-items: center;
-}
-
-
-video {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    margin: 1em 0;
-}
-
-/* .container.video {
+      /* .container.video {
     width: 100%;
         height: 100%;
         border-radius: 10px;
         margin: 1em 0;
 } */
-.video-container {
-  position: relative;
-  width: 100%;
-  /* max-width: 600px; Ajuster selon les besoins */
-  margin: 0 auto;
-}
+      .video-container {
+        position: relative;
+        width: 100%;
+        /* max-width: 600px; Ajuster selon les besoins */
+        margin: 0 auto;
+      }
 
-#videoFront {
-  width: 100%;
-  height: auto; /* Assure que la hauteur est proportionnelle à la largeur */
-}
+      #videoFront {
+        width: 100%;
+        height: auto; /* Assure que la hauteur est proportionnelle à la largeur */
+      }
 
-.overlay-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.5; /* Ajuster l'opacité selon les besoins */
-  pointer-events: none; /* Assure que l'image ne gêne pas les contrôles de la vidéo */
-  object-fit: cover; /* Assure que l'image couvre tout l'élément sans déformation */
-}
+      .overlay-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5; /* Ajuster l'opacité selon les besoins */
+        pointer-events: none; /* Assure que l'image ne gêne pas les contrôles de la vidéo */
+        object-fit: cover; /* Assure que l'image couvre tout l'élément sans déformation */
+      }
 
+      /* Photo preview */
+      .photo-preview {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 1em 0;
+      }
 
+      .photo-preview div {
+        margin: 0.5em;
+        text-align: center;
+      }
 
-/* Photo preview */
-.photo-preview {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 1em 0;
-}
+      .photo-preview img {
+        width: 150px;
+        height: auto;
+        border-radius: 10px;
+      }
 
+      /* Button group */
+      .button-group {
+        margin-top: 1em;
+      }
 
-.photo-preview div {
-    margin: 0.5em;
-    text-align: center;
-}
+      .button-group button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.5em 1em;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
 
+      .button-group button:hover {
+        background-color: #0056b3;
+      }
 
-.photo-preview img {
-    width: 150px;
-    height: auto;
-    border-radius: 10px;
-}
+      /* Loader */
+      .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #007bff;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 2s linear infinite;
+        margin: 0 auto 1em auto;
+      }
 
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 
-/* Button group */
-.button-group {
-    margin-top: 1em;
-}
-
-
-.button-group button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5em 1em;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-
-.button-group button:hover {
-    background-color: #0056b3;
-}
-
-
-/* Loader */
-.loader {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #007bff;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 2s linear infinite;
-    margin: 0 auto 1em auto;
-}
-
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-
-/* Textarea */
-textarea {
-    width: 100%;
-    height: 200px;
-    padding: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: none;
-    font-family: 'Arial', sans-serif;
-    font-size: 1em;
-}
-
-
-/* Media Queries */
-@media (max-width: 600px) {
-    .container {
+      /* Textarea */
+      textarea {
+        width: 100%;
+        height: 200px;
         padding: 1em;
-    }
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+        font-family: "Arial", sans-serif;
+        font-size: 1em;
+      }
 
+      /* Media Queries */
+      @media (max-width: 600px) {
+        .container {
+          padding: 1em;
+        }
 
-    .gender-selection {
-        flex-direction: column;
-        gap: 1em;
-    }
+        .gender-selection {
+          flex-direction: column;
+          gap: 1em;
+        }
 
-
-    .photo-preview img {
-        width: 100px;
-    }
-}
-
+        .photo-preview img {
+          width: 100px;
+        }
+      }
     </style>
+  </head>
+  <body>
     <div class="progress-container">
       <div class="progress-step completed"></div>
       <div class="progress-step"></div>
@@ -396,7 +379,8 @@ textarea {
     <div id="page4" class="page" style="display: none">
       <div class="container video">
         <div class="video-container">
-          <video id="videoFront" autoplay style="display: none"></video>
+          <video id="videoFront" autoplay></video>
+          <canvas id="canvasFront" style="display: none"></canvas>
           <img
             src="assets/overlay-image-front-top.png"
             class="overlay-image"
@@ -783,91 +767,9 @@ textarea {
         left: null,
       };
 
-      function retakePhoto(
-        view,
-        fromReviewPage = false,
-        returnToReviewPage = false
-      ) {
-        const videoElement = document.getElementById(
-          `video${capitalize(view)}`
-        );
-        const captureBtn = document.getElementById(
-          `captureBtn${capitalize(view)}`
-        );
-        const retakeBtn = document.getElementById(
-          `retakeBtn${capitalize(view)}`
-        );
-        const confirmBtn = document.getElementById(
-          `confirmBtn${capitalize(view)}`
-        );
-        const previewElement = document.getElementById(
-          `preview${capitalize(view)}`
-        );
-
+      function retakePhoto(view) {
         capturedPhotos[view] = null;
-        videoElement.style.display = "none";
-        previewElement.style.display = "none";
-        captureBtn.style.display = "block";
-        retakeBtn.style.display = "none";
-        confirmBtn.style.display = "none";
-
-        const captureAndReturn = () => {
-          startCapture(view);
-          confirmBtn.onclick = () => {
-            const canvasElement = document.getElementById(
-              `canvas${capitalize(view)}`
-            );
-            const context = canvasElement.getContext("2d");
-            canvasElement.width = videoElement.videoWidth;
-            canvasElement.height = videoElement.videoHeight;
-            context.drawImage(
-              videoElement,
-              0,
-              0,
-              canvasElement.width,
-              canvasElement.height
-            );
-            capturedPhotos[view] = canvasElement.toDataURL("image/jpeg");
-
-            // Stop the video stream
-            const tracks = videoElement.srcObject.getTracks();
-            tracks.forEach((track) => track.stop());
-            videoElement.srcObject = null;
-
-            videoElement.style.display = "none";
-            previewElement.src = capturedPhotos[view];
-            previewElement.style.display = "block";
-            captureBtn.style.display = "none";
-            retakeBtn.style.display = "block";
-            confirmBtn.style.display = "block";
-
-            // Update the photo in the review page
-            const previewElementReview = document.getElementById(
-              `${view}ViewPreview`
-            );
-            previewElementReview.src = capturedPhotos[view];
-
-            // Navigate to the review page
-            navigateTo("page11");
-          };
-        };
-
-        if (fromReviewPage) {
-          navigateTo(
-            `page${
-              view === "front"
-                ? 4
-                : view === "top"
-                ? 6
-                : view === "right"
-                ? 8
-                : 10
-            }`
-          );
-          setTimeout(captureAndReturn, 500); // Ensure capture function is called after navigation
-        } else {
-          captureAndReturn();
-        }
+        startCapture(view);
       }
 
       // Update button onclicks in page 10 to use the new parameter
