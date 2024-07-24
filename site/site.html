@@ -9,7 +9,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <title>Combined Application</title>
-    <style>
+    <!-- <style>
       /* Global styles */
       body,
       h1,
@@ -288,19 +288,18 @@
           width: 100px;
         }
       }
-    </style>
+    </style> -->
   </head>
   <body>
-    <div class="progress-container">
-      <div class="progress-step completed"></div>
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
-    </div>
-
     <!-- Page 1: Select Gender -->
     <div id="page1" class="page">
       <div class="container">
+        <div class="progress-container">
+          <div class="progress-step completed"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+        </div>
         <h1>INFORMATIONS</h1>
         <p>
           <b>
@@ -333,6 +332,12 @@
     <!-- Page 2: Photo Instructions (Front View) -->
     <div id="page2" class="page" style="display: none">
       <div class="container">
+        <div class="progress-container">
+          <div class="progress-step completed"></div>
+          <div class="progress-step completed"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+        </div>
         <h1>PRENEZ DES PHOTOS</h1>
         <p>
           <b>
@@ -342,21 +347,41 @@
         </p>
         <div class="photo-example">
           <div class="photo-grid">
-            <img src="assets\front.png" alt="Photo 1" class="photo" />
-            <img src="assets\top.png" alt="Photo 2" class="photo" />
-            <img src="assets\right.png" alt="Photo 3" class="photo" />
-            <img src="assets\left.png" alt="Photo 4" class="photo" />
+            <img src="assets/front.png" alt="Photo 1" class="photo" />
+            <img src="assets/top.png" alt="Photo 2" class="photo" />
+            <img src="assets/right.png" alt="Photo 3" class="photo" />
+            <img src="assets/left.png" alt="Photo 4" class="photo" />
           </div>
         </div>
         <button class="continue-btn" onclick="navigateTo('page3')">
           <b>COMMENCER</b>
         </button>
+
+        <!-- Section dépliante -->
+        <div class="collapsible-container">
+          <button class="collapsible-button">+</button>
+          <div class="collapsible-content" style="display: none">
+            <p>
+              Voici du texte additionnel qui s'affiche lorsque vous cliquez sur
+              l'icône "+".
+            </p>
+            <p>
+              Vous pouvez ajouter autant de texte que vous le souhaitez ici.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Page 3: Photo Instructions (Front View) -->
     <div id="page3" class="page" style="display: none">
       <div class="container">
+        <div class="progress-container">
+          <div class="progress-step completed"></div>
+          <div class="progress-step completed"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+        </div>
         <h3>
           <img src="assets/camera.png" alt="Camera Icon" class="icon" />
           Angle 1 : vue de face
@@ -427,6 +452,12 @@
     <!-- Page 5: Photo Instructions (Top View) -->
     <div id="page5" class="page" style="display: none">
       <div class="container">
+        <div class="progress-container">
+          <div class="progress-step completed"></div>
+          <div class="progress-step completed"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+        </div>
         <h3>
           <img src="assets/camera.png" alt="Camera Icon" class="icon" />
           Angle 2 : vue du dessus
@@ -494,6 +525,12 @@
     <!-- Page 7: Photo Instructions (Right View) -->
     <div id="page7" class="page" style="display: none">
       <div class="container">
+        <div class="progress-container">
+          <div class="progress-step completed"></div>
+          <div class="progress-step completed"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+        </div>
         <h3>
           <img src="assets/camera.png" alt="Camera Icon" class="icon" />
           Angle 3 : côté droit
@@ -564,6 +601,12 @@
     <!-- Page 9: Photo Instructions (Left View) -->
     <div id="page9" class="page" style="display: none">
       <div class="container">
+        <div class="progress-container">
+          <div class="progress-step completed"></div>
+          <div class="progress-step completed"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+        </div>
         <h3>
           <img src="assets/camera.png" alt="Camera Icon" class="icon" />
           Angle 4 : côté gauche
@@ -634,6 +677,12 @@
     <!-- Page 11: Review Photos -->
     <div id="page11" class="page" style="display: none">
       <div class="container">
+        <div class="progress-container">
+          <div class="progress-step completed"></div>
+          <div class="progress-step completed"></div>
+          <div class="progress-step completed"></div>
+          <div class="progress-step"></div>
+        </div>
         <h1>Review Your Photos</h1>
         <div class="photo-preview">
           <div>
@@ -668,6 +717,12 @@
     <!-- Page 13: API Results -->
     <div id="page13" class="page" style="display: none">
       <div class="container">
+        <div class="progress-container">
+          <div class="progress-step completed"></div>
+          <div class="progress-step completed"></div>
+          <div class="progress-step completed"></div>
+          <div class="progress-step completed"></div>
+        </div>
         <h1>API Results</h1>
         <h2>Front View</h2>
         <textarea id="result" readonly></textarea>
@@ -797,18 +852,18 @@
       }
 
       // Update button onclicks in page 10 to use the new parameter
-      document.querySelector(
-        "button[onclick='retakePhoto(\"front\", true)']"
-      ).onclick = () => retakePhoto("front", true, true);
-      document.querySelector(
-        "button[onclick='retakePhoto(\"top\", true)']"
-      ).onclick = () => retakePhoto("top", true, true);
-      document.querySelector(
-        "button[onclick='retakePhoto(\"right\", true)']"
-      ).onclick = () => retakePhoto("right", true, true);
-      document.querySelector(
-        "button[onclick='retakePhoto(\"left\", true)']"
-      ).onclick = () => retakePhoto("left", true, true);
+      // document.querySelector(
+      //   "button[onclick='retakePhoto(\"front\", true)']"
+      // ).onclick = () => retakePhoto("front", true, true);
+      // document.querySelector(
+      //   "button[onclick='retakePhoto(\"top\", true)']"
+      // ).onclick = () => retakePhoto("top", true, true);
+      // document.querySelector(
+      //   "button[onclick='retakePhoto(\"right\", true)']"
+      // ).onclick = () => retakePhoto("right", true, true);
+      // document.querySelector(
+      //   "button[onclick='retakePhoto(\"left\", true)']"
+      // ).onclick = () => retakePhoto("left", true, true);
 
       function confirmPhoto(view, returnToReviewPage = false) {
         const previewElement = document.getElementById(`${view}ViewPreview`);
@@ -902,6 +957,30 @@
             button.classList.add("selected");
           });
         });
+
+        // Gestion de la section dépliante
+        const collapsibleButton = document.querySelector(".collapsible-button");
+        const collapsibleContent = document.querySelector(
+          ".collapsible-content"
+        );
+
+        console.log("Collapsible Button:", collapsibleButton);
+        console.log("Collapsible Content:", collapsibleContent);
+
+        if (collapsibleButton && collapsibleContent) {
+          collapsibleButton.addEventListener("click", () => {
+            console.log("Button Clicked");
+            if (collapsibleContent.style.display === "block") {
+              collapsibleContent.style.display = "none";
+              collapsibleButton.textContent = "+";
+            } else {
+              collapsibleContent.style.display = "block";
+              collapsibleButton.textContent = "−";
+            }
+          });
+        } else {
+          console.error("Elements not found");
+        }
       });
     </script>
   </body>

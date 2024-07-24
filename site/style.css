@@ -1,146 +1,167 @@
 /* Global styles */
-body, h1, button {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333;
+body,
+h1,
+button {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: #333;
 }
 
 p {
-    margin: 0;
-    padding: 0;
-    font-style: bold;
+  margin: 0;
+  padding: 0;
+  font-style: bold;
 }
 
 body {
-    background-color: white;
-    text-align: center;
+  background-color: white;
+  text-align: center;
 }
-
 
 /* Container */
 .page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 0 1em; /* Add padding to avoid cutting off content on small screens */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 1em; /* Add padding to avoid cutting off content on small screens */
 }
 
-
 .container {
-    background: white;
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
+  background: white;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
 }
 
 .progress-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #f1f1f1;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: #f1f1f1; */
+  padding: 10px 0;
+  position: flex;
+  width: 100%;
+  top: 0;
+  left: 0;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 .progress-step {
-    width: 22%;
-    height: 10px;
-    background-color: lightgray;
-    color: black;
-    text-align: center;
-    line-height: 30px;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+  width: 22%;
+  height: 10px;
+  background-color: lightgray;
+  color: black;
+  text-align: center;
+  line-height: 30px;
+  /* border-radius: 5px; */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .progress-step.completed {
-    background-color: black;
-    color: white;
+  background-color: #dad5c4;
+  color: white;
 }
 
+.collapsible-container {
+    margin-top: 20px;
+  }
+  
+  .collapsible-button {
+    background-color: #f1f1f1;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+  }
+  
+  .collapsible-content {
+    display: none;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    transition: max-height 0.2s ease-out;
+  }
+  
+  .collapsible-content.expanded {
+    display: block;
+  }
+  
+
 .photo-container {
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black; /* Encadrer la photo avec une bordure noire */
-    max-width: 300px; /* Largeur maximale du conteneur */
-    max-height: 325px;
-    margin: 0 auto; /* Centrer le conteneur horizontalement */
-    margin-bottom: 12px;
-    margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  max-width: 300px; 
+  max-height: 325px;
+  margin: 0 auto; 
+  margin-bottom: 12px;
+  margin-top: 12px;
 }
 .photo {
-    max-width: 100%; /* Assurer que la photo ne dépasse pas la largeur du conteneur */
-    height: auto; /* Maintenir le ratio de la photo */
+  max-width: 100%;
+  height: auto; 
 }
 
 /* Gender selection */
 .gender-selection {
-    /* display: flex; */
-    text-align: left;
-    justify-content: space-around;
-    margin: 1em 0;
+  text-align: left;
+  justify-content: space-around;
+  margin: 1em 0;
 }
 
-
 .gender-btn {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 5px;
-    width: 100%;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 5px;
+  width: 100%;
 }
 
 .gender-btn:hover {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
-
 
 /* Privacy policy */
 .privacy-policy {
-    font-size: 0.8em;
-    margin-top: 1em;
+  font-size: 0.8em;
+  margin-top: 1em;
 }
-
 
 .privacy-policy a {
-    color: #007bff;
-    text-decoration: none;
+  color: #007bff;
+  text-decoration: none;
 }
-
 
 .privacy-policy a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
-
 
 /* Photo example */
 .photo-example {
-    margin: 1em 0;
+    display: flex;
+  margin: 1em 0;
 }
 
-
 .photo-example img {
-    max-width: 45%;
-    border-radius: 10px;
+  max-width: 45%;
+  border-radius: 10px;
 }
 
 .icon {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 /* Buttons */
@@ -148,32 +169,25 @@ body {
 .capture-btn,
 .retake-btn,
 .confirm-btn {
-    width: 100%;
-    background-color: black;
-    color: white;
-    border: 1px solid black;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 5px;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 5px;
+  justify-content: center;
+  align-items: center;
 }
-
 
 video {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    margin: 1em 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  margin: 1em 0;
 }
 
-/* .container.video {
-    width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        margin: 1em 0;
-} */
 .video-container {
   position: relative;
   width: 100%;
@@ -197,98 +211,89 @@ video {
   object-fit: cover; /* Assure que l'image couvre tout l'élément sans déformation */
 }
 
-
-
 /* Photo preview */
 .photo-preview {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 1em 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 1em 0;
 }
-
 
 .photo-preview div {
-    margin: 0.5em;
-    text-align: center;
+  margin: 0.5em;
+  text-align: center;
 }
-
 
 .photo-preview img {
-    width: 150px;
-    height: auto;
-    border-radius: 10px;
+  width: 150px;
+  height: auto;
+  border-radius: 10px;
 }
-
 
 /* Button group */
 .button-group {
-    margin-top: 1em;
+  margin-top: 1em;
 }
-
 
 .button-group button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5em 1em;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
-
 
 .button-group button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
-
 
 /* Loader */
 .loader {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #007bff;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 2s linear infinite;
-    margin: 0 auto 1em auto;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #007bff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  margin: 0 auto 1em auto;
 }
-
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
 
 /* Textarea */
 textarea {
-    width: 100%;
-    height: 200px;
-    padding: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: none;
-    font-family: 'Arial', sans-serif;
-    font-size: 1em;
+  width: 100%;
+  height: 200px;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  font-family: "Arial", sans-serif;
+  font-size: 1em;
 }
-
 
 /* Media Queries */
 @media (max-width: 600px) {
-    .container {
-        padding: 1em;
-    }
+  .container {
+    padding: 1em;
+  }
 
+  .gender-selection {
+    flex-direction: column;
+    gap: 1em;
+  }
 
-    .gender-selection {
-        flex-direction: column;
-        gap: 1em;
-    }
-
-
-    .photo-preview img {
-        width: 100px;
-    }
+  .photo-preview img {
+    width: 100px;
+  }
 }
