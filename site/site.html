@@ -853,17 +853,17 @@
 
       // Update button onclicks in page 10 to use the new parameter
       document.querySelector(
-        "button[onclick='retakePhoto(\"front\", true)']"
-      ).onclick = () => retakePhoto("front", true, true);
+        "button[onclick='retakePhoto(\"front\")']"
+      ).onclick = () => retakePhoto("front");
       document.querySelector(
-        "button[onclick='retakePhoto(\"top\", true)']"
-      ).onclick = () => retakePhoto("top", true, true);
+        "button[onclick='retakePhoto(\"top\")']"
+      ).onclick = () => retakePhoto("top");
       document.querySelector(
-        "button[onclick='retakePhoto(\"right\", true)']"
-      ).onclick = () => retakePhoto("right", true, true);
+        "button[onclick='retakePhoto(\"right\")']"
+      ).onclick = () => retakePhoto("right");
       document.querySelector(
-        "button[onclick='retakePhoto(\"left\", true)']"
-      ).onclick = () => retakePhoto("left", true, true);
+        "button[onclick='retakePhoto(\"left\")']"
+      ).onclick = () => retakePhoto("left")
 
       function confirmPhoto(view, returnToReviewPage = false) {
         const previewElement = document.getElementById(`${view}ViewPreview`);

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capture Photo</title>
+  <style>
+    body { text-align: center; }
+    video, canvas { max-width: 100%; height: auto; }
+    .capture-btn, .retake-btn, .confirm-btn { display: block; margin: 10px auto; }
+  </style>
+</head>
+<body>
+  <div class="video-container">
+    <video id="videoFront" autoplay></video>
+    <canvas id="canvasFront" style="display: none;"></canvas>
+  </div>
+  <button id="captureBtnFront" class="capture-btn">Prendre la photo</button>
+  <img id="previewFront" style="display: none;" alt="Preview">
+  <button id="retakeBtnFront" class="retake-btn" style="display: none;">Reprendre</button>
+  <button id="confirmBtnFront" class="confirm-btn" style="display: none;">Confirmer</button>
+  <script >// Fonction pour démarrer la capture vidéo
+    function startCapture(view) {
+      const videoElement = document.getElementById(`video${capitalize(view)}`);
+      const captureBtn = document.getElementById(`captureBtn${capitalize(view)}`);
+      const retakeBtn = document.getElementById(`retakeBtn${capitalize(view)}`);
+      const confirmBtn = document.getElementById(`confirmBtn${capitalize(view)}`);
+      const previewElement = document.getElementById(`preview${capitalize(view)}`);
+    
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          videoElement.srcObject = stream;
+          videoElement.style.display = 'block';
+          captureBtn.style.display = 'block';
+          retakeBtn.style.display = 'none';
+          confirmBtn.style.display = 'none';
+        })
+        .catch(error => {
+          console.error('Error accessing the camera:', error);
+        });
+    
+      captureBtn.onclick = () => {
+        const canvasElement = document.getElementById(`canvas${capitalize(view)}`);
+        const context = canvasElement.getContext('2d');
+        canvasElement.width = videoElement.videoWidth;
+        canvasElement.height = videoElement.videoHeight;
+        context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+        
+        capturedPhotos[view] = canvasElement.toDataURL('image/jpeg');
+        
+        // Arrêter le flux vidéo
+        const tracks = videoElement.srcObject.getTracks();
+        tracks.forEach(track => track.stop());
+        videoElement.srcObject = null;
+        
+        videoElement.style.display = 'none';
+        previewElement.src = capturedPhotos[view];
+        previewElement.style.display = 'block';
+        captureBtn.style.display = 'none';
+        retakeBtn.style.display = 'block';
+        confirmBtn.style.display = 'block';
+      };
+    }
+    
+    // Fonction pour reformater la vue capturée
+    function retakePhoto(view) {
+      capturedPhotos[view] = null;
+      startCapture(view);
+    }
+    
+    // Capitalize function
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+    
+    // Stockage des photos capturées
+    let capturedPhotos = {
+      front: null,
+      top: null,
+      right: null,
+      left: null,
+    };
+    
+    // Initialisation de la capture pour la vue de face
+    startCapture('front');
+    </script>
+</body>
+</html>
