@@ -852,18 +852,18 @@
       }
 
       // Update button onclicks in page 10 to use the new parameter
-      // document.querySelector(
-      //   "button[onclick='retakePhoto(\"front\", true)']"
-      // ).onclick = () => retakePhoto("front", true, true);
-      // document.querySelector(
-      //   "button[onclick='retakePhoto(\"top\", true)']"
-      // ).onclick = () => retakePhoto("top", true, true);
-      // document.querySelector(
-      //   "button[onclick='retakePhoto(\"right\", true)']"
-      // ).onclick = () => retakePhoto("right", true, true);
-      // document.querySelector(
-      //   "button[onclick='retakePhoto(\"left\", true)']"
-      // ).onclick = () => retakePhoto("left", true, true);
+      document.querySelector(
+        "button[onclick='retakePhoto(\"front\", true)']"
+      ).onclick = () => retakePhoto("front", true, true);
+      document.querySelector(
+        "button[onclick='retakePhoto(\"top\", true)']"
+      ).onclick = () => retakePhoto("top", true, true);
+      document.querySelector(
+        "button[onclick='retakePhoto(\"right\", true)']"
+      ).onclick = () => retakePhoto("right", true, true);
+      document.querySelector(
+        "button[onclick='retakePhoto(\"left\", true)']"
+      ).onclick = () => retakePhoto("left", true, true);
 
       function confirmPhoto(view, returnToReviewPage = false) {
         const previewElement = document.getElementById(`${view}ViewPreview`);
