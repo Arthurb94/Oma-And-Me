@@ -846,24 +846,94 @@
         left: null,
       };
 
-      function retakePhoto(view) {
+      function retakePhoto(
+        view,
+        fromReviewPage = false,
+        returnToReviewPage = false
+    ) {
+        const videoElement = document.getElementById(`video${capitalize(view)}`);
+        const captureBtn = document.getElementById(`captureBtn${capitalize(view)}`);
+        const retakeBtn = document.getElementById(`retakeBtn${capitalize(view)}`);
+        const confirmBtn = document.getElementById(`confirmBtn${capitalize(view)}`);
+        const previewElement = document.getElementById(`preview${capitalize(view)}`);
         capturedPhotos[view] = null;
-        startCapture(view);
-      }
+        if (videoElement) videoElement.style.display = "none";
+        if (previewElement) previewElement.style.display = "none";
+        if (captureBtn) captureBtn.style.display = "block";
+        if (retakeBtn) retakeBtn.style.display = "none";
+        if (confirmBtn) confirmBtn.style.display = "none";
 
-      // Update button onclicks in page 10 to use the new parameter
-      document.querySelector(
-        "button[onclick='retakePhoto(\"front\")']"
-      ).onclick = () => retakePhoto("front");
-      document.querySelector(
-        "button[onclick='retakePhoto(\"top\")']"
-      ).onclick = () => retakePhoto("top");
-      document.querySelector(
-        "button[onclick='retakePhoto(\"right\")']"
-      ).onclick = () => retakePhoto("right");
-      document.querySelector(
-        "button[onclick='retakePhoto(\"left\")']"
-      ).onclick = () => retakePhoto("left")
+        const captureAndReturn = () => {
+            startCapture(view);
+            if (confirmBtn) {
+                confirmBtn.onclick = () => {
+                    const canvasElement = document.getElementById(`canvas${capitalize(view)}`);
+                    if (canvasElement) {
+                        const context = canvasElement.getContext("2d");
+                        canvasElement.width = videoElement.videoWidth;
+                        canvasElement.height = videoElement.videoHeight;
+                        context.drawImage(
+                            videoElement,
+                            0,
+                            0,
+                            canvasElement.width,
+                            canvasElement.height
+                        );
+                        capturedPhotos[view] = canvasElement.toDataURL("image/jpeg");
+                        // Stop the video stream
+                        if (videoElement.srcObject) {
+                            const tracks = videoElement.srcObject.getTracks();
+                            tracks.forEach((track) => track.stop());
+                            videoElement.srcObject = null;
+                        }
+                        if (videoElement) videoElement.style.display = "none";
+                        if (previewElement) {
+                            previewElement.src = capturedPhotos[view];
+                            previewElement.style.display = "block";
+                        }
+                        if (captureBtn) captureBtn.style.display = "none";
+                        if (retakeBtn) retakeBtn.style.display = "block";
+                        if (confirmBtn) confirmBtn.style.display = "block";
+                        // Update the photo in the review page
+                        const previewElementReview = document.getElementById(`${view}ViewPreview`);
+                        if (previewElementReview) previewElementReview.src = capturedPhotos[view];
+                        // Navigate to the review page
+                        navigateTo("page10");
+                    } else {
+                        console.error("Canvas element non trouvé");
+                    }
+                };
+            }
+        };
+
+        if (fromReviewPage) {
+            navigateTo(`page${
+                view === "front" ? 3 :
+                view === "top" ? 5 :
+                view === "right" ? 7 :
+                9
+            }`);
+            setTimeout(captureAndReturn, 500); // Ensure capture function is called after navigation
+        } else {
+            captureAndReturn();
+        }
+    }
+
+    // // Assurez-vous que les boutons existent avant d'attribuer des événements
+    // const retakeButtons = {
+    //     front: document.querySelector("button[data-view='front']"),
+    //     top: document.querySelector("button[data-view='top']"),
+    //     right: document.querySelector("button[data-view='right']"),
+    //     left: document.querySelector("button[data-view='left']")
+    // };
+
+    // for (const [view, button] of Object.entries(retakeButtons)) {
+    //     if (button) {
+    //         button.onclick = () => retakePhoto(view, true, true);
+    //     } else {
+    //         console.error(`Bouton pour '${view}' non trouvé`);
+    //     }
+    // }
 
       function confirmPhoto(view, returnToReviewPage = false) {
         const previewElement = document.getElementById(`${view}ViewPreview`);
