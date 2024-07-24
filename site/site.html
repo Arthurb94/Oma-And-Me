@@ -9,6 +9,286 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <title>Combined Application</title>
+    <!-- <style>
+      /* Global styles */
+      body,
+      h1,
+      button {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+        font-style: bold;
+      }
+
+      body {
+        background-color: white;
+        text-align: center;
+      }
+
+      /* Container */
+      .page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 0 1em; /* Add padding to avoid cutting off content on small screens */
+      }
+
+      .container {
+        background: white;
+        padding: 2em;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+      }
+
+      .progress-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #f1f1f1;
+        padding: 10px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .progress-step {
+        width: 22%;
+        height: 10px;
+        background-color: lightgray;
+        color: black;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .progress-step.completed {
+        background-color: black;
+        color: white;
+      }
+
+      .photo-container {
+        /* display: flex; */
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black; /* Encadrer la photo avec une bordure noire */
+        max-width: 300px; /* Largeur maximale du conteneur */
+        max-height: 325px;
+        margin: 0 auto; /* Centrer le conteneur horizontalement */
+        margin-bottom: 12px;
+        margin-top: 12px;
+      }
+      .photo {
+        max-width: 100%; /* Assurer que la photo ne dépasse pas la largeur du conteneur */
+        height: auto; /* Maintenir le ratio de la photo */
+      }
+
+      /* Gender selection */
+      .gender-selection {
+        /* display: flex; */
+        text-align: left;
+        justify-content: space-around;
+        margin: 1em 0;
+      }
+
+      .gender-btn {
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 5px;
+        width: 100%;
+      }
+
+      .gender-btn:hover {
+        background-color: black;
+        color: white;
+      }
+
+      /* Privacy policy */
+      .privacy-policy {
+        font-size: 0.8em;
+        margin-top: 1em;
+      }
+
+      .privacy-policy a {
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      .privacy-policy a:hover {
+        text-decoration: underline;
+      }
+
+      /* Photo example */
+      .photo-example {
+        margin: 1em 0;
+      }
+
+      .photo-example img {
+        max-width: 45%;
+        border-radius: 10px;
+      }
+
+      .icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      /* Buttons */
+      .continue-btn,
+      .capture-btn,
+      .retake-btn,
+      .confirm-btn {
+        width: 100%;
+        background-color: black;
+        color: white;
+        border: 1px solid black;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 5px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        margin: 1em 0;
+      }
+
+      /* .container.video {
+    width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        margin: 1em 0;
+} */
+      .video-container {
+        position: relative;
+        width: 100%;
+        /* max-width: 600px; Ajuster selon les besoins */
+        margin: 0 auto;
+      }
+
+      #videoFront {
+        width: 100%;
+        height: auto; /* Assure que la hauteur est proportionnelle à la largeur */
+      }
+
+      .overlay-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5; /* Ajuster l'opacité selon les besoins */
+        pointer-events: none; /* Assure que l'image ne gêne pas les contrôles de la vidéo */
+        object-fit: cover; /* Assure que l'image couvre tout l'élément sans déformation */
+      }
+
+      /* Photo preview */
+      .photo-preview {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 1em 0;
+      }
+
+      .photo-preview div {
+        margin: 0.5em;
+        text-align: center;
+      }
+
+      .photo-preview img {
+        width: 150px;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      /* Button group */
+      .button-group {
+        margin-top: 1em;
+      }
+
+      .button-group button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.5em 1em;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .button-group button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Loader */
+      .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #007bff;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 2s linear infinite;
+        margin: 0 auto 1em auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Textarea */
+      textarea {
+        width: 100%;
+        height: 200px;
+        padding: 1em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+        font-family: "Arial", sans-serif;
+        font-size: 1em;
+      }
+
+      /* Media Queries */
+      @media (max-width: 600px) {
+        .container {
+          padding: 1em;
+        }
+
+        .gender-selection {
+          flex-direction: column;
+          gap: 1em;
+        }
+
+        .photo-preview img {
+          width: 100px;
+        }
+      }
+    </style> -->
   </head>
   <body>
     <!-- Page 1: Select Gender -->
@@ -153,7 +433,7 @@
         <button
           id="retakeBtnFront"
           class="retake-btn"
-          onclick="retakePhoto('front')"
+          onclick="retakePhoto('front', true)"
           style="display: none"
         >
           REPRENDRE
@@ -226,7 +506,7 @@
         <button
           id="retakeBtnTop"
           class="retake-btn"
-          onclick="retakePhoto('top')"
+          onclick="retakePhoto('top', true)"
           style="display: none"
         >
           REPRENDRE
@@ -302,7 +582,7 @@
         <button
           id="retakeBtnRight"
           class="retake-btn"
-          onclick="retakePhoto('right')"
+          onclick="retakePhoto('right', true)"
           style="display: none"
         >
           REPRENDRE
@@ -378,7 +658,7 @@
         <button
           id="retakeBtnLeft"
           class="retake-btn"
-          onclick="retakePhoto('left')"
+          onclick="retakePhoto('left', true)"
           style="display: none"
         >
           REPRENDRE
@@ -566,117 +846,24 @@
         left: null,
       };
 
-      function retakePhoto(
-        view,
-        fromReviewPage = false,
-        returnToReviewPage = false
-      ) {
-        const videoElement = document.getElementById(
-          `video${capitalize(view)}`
-        );
-        const captureBtn = document.getElementById(
-          `captureBtn${capitalize(view)}`
-        );
-        const retakeBtn = document.getElementById(
-          `retakeBtn${capitalize(view)}`
-        );
-        const confirmBtn = document.getElementById(
-          `confirmBtn${capitalize(view)}`
-        );
-        const previewElement = document.getElementById(
-          `preview${capitalize(view)}`
-        );
+      function retakePhoto(view) {
         capturedPhotos[view] = null;
-        if (videoElement) videoElement.style.display = "none";
-        if (previewElement) previewElement.style.display = "none";
-        if (captureBtn) captureBtn.style.display = "block";
-        if (retakeBtn) retakeBtn.style.display = "none";
-        if (confirmBtn) confirmBtn.style.display = "none";
-
-        const captureAndReturn = () => {
-          startCapture(view);
-          if (confirmBtn) {
-            confirmBtn.onclick = () => {
-              const canvasElement = document.getElementById(
-                `canvas${capitalize(view)}`
-              );
-              if (canvasElement) {
-                const context = canvasElement.getContext("2d");
-                canvasElement.width = videoElement.videoWidth;
-                canvasElement.height = videoElement.videoHeight;
-                context.drawImage(
-                  videoElement,
-                  0,
-                  0,
-                  canvasElement.width,
-                  canvasElement.height
-                );
-                capturedPhotos[view] = canvasElement.toDataURL("image/jpeg");
-
-                // Stop the video stream
-                if (videoElement.srcObject) {
-                  const tracks = videoElement.srcObject.getTracks();
-                  tracks.forEach((track) => track.stop());
-                  videoElement.srcObject = null;
-                }
-                if (videoElement) videoElement.style.display = "none";
-                if (previewElement) {
-                  previewElement.src = capturedPhotos[view];
-                  previewElement.style.display = "block";
-                }
-                if (captureBtn) captureBtn.style.display = "none";
-                if (retakeBtn) retakeBtn.style.display = "block";
-                if (confirmBtn) confirmBtn.style.display = "block";
-
-                // Update the photo in the review page
-                const previewElementReview = document.getElementById(
-                  `${view}ViewPreview`
-                );
-                if (previewElementReview)
-                  previewElementReview.src = capturedPhotos[view];
-
-                // Navigate to the review page
-                navigateTo("page10");
-              } else {
-                console.error("Canvas element non trouvé");
-              }
-            };
-          }
-        };
-
-        if (fromReviewPage) {
-          navigateTo(
-            `page${
-              view === "front"
-                ? 3
-                : view === "top"
-                ? 5
-                : view === "right"
-                ? 7
-                : 9
-            }`
-          );
-          setTimeout(captureAndReturn, 500); // Ensure capture function is called after navigation
-        } else {
-          captureAndReturn();
-        }
+        startCapture(view);
       }
 
-      // // Assurez-vous que les boutons existent avant d'attribuer des événements
-      // const retakeButtons = {
-      //     front: document.querySelector("button[data-view='front']"),
-      //     top: document.querySelector("button[data-view='top']"),
-      //     right: document.querySelector("button[data-view='right']"),
-      //     left: document.querySelector("button[data-view='left']")
-      // };
-
-      // for (const [view, button] of Object.entries(retakeButtons)) {
-      //     if (button) {
-      //         button.onclick = () => retakePhoto(view, true, true);
-      //     } else {
-      //         console.error(`Bouton pour '${view}' non trouvé`);
-      //     }
-      // }
+      // Update button onclicks in page 10 to use the new parameter
+      document.querySelector(
+        "button[onclick=\"retakePhoto('front', true)\"]"
+      ).onclick = () => retakePhoto("front", true, true);
+      document.querySelector(
+        "button[onclick=\"retakePhoto('top', true)\"]"
+      ).onclick = () => retakePhoto("top", true, true);
+      document.querySelector(
+        "button[onclick=\"retakePhoto('right', true)\"]"
+      ).onclick = () => retakePhoto("right", true, true);
+      document.querySelector(
+        "button[onclick=\"retakePhoto('left', true)\"]"
+      ).onclick = () => retakePhoto("left", true, true);
 
       function confirmPhoto(view, returnToReviewPage = false) {
         const previewElement = document.getElementById(`${view}ViewPreview`);
@@ -691,36 +878,15 @@
         }
       }
 
-      // Mise à jour des événements onclick des boutons
-      document
-        .getElementById("retakeBtnFront")
-        ?.addEventListener("click", () => retakePhoto("front", true, true));
-      document
-        .getElementById("retakeBtnTop")
-        ?.addEventListener("click", () => retakePhoto("top", true, true));
-      document
-        .getElementById("retakeBtnRight")
-        ?.addEventListener("click", () => retakePhoto("right", true, true));
-      document
-        .getElementById("retakeBtnLeft")
-        ?.addEventListener("click", () => retakePhoto("left", true, true));
-
-      document
-        .getElementById("confirmBtnFront")
-        ?.addEventListener("click", () => confirmPhoto("front", true));
-      document
-        .getElementById("confirmBtnTop")
-        ?.addEventListener("click", () => confirmPhoto("top", true));
-      document
-        .getElementById("confirmBtnRight")
-        ?.addEventListener("click", () => confirmPhoto("right", true));
-      document
-        .getElementById("confirmBtnLeft")
-        ?.addEventListener("click", () => confirmPhoto("left", true));
-
-      function capitalize(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-      }
+      // Update confirm button onclicks to include returnToReviewPage parameter
+      document.getElementById("confirmBtnFront").onclick = () =>
+        confirmPhoto("front", true);
+      document.getElementById("confirmBtnTop").onclick = () =>
+        confirmPhoto("top", true);
+      document.getElementById("confirmBtnRight").onclick = () =>
+        confirmPhoto("right", true);
+      document.getElementById("confirmBtnLeft").onclick = () =>
+        confirmPhoto("left", true);
 
       function sendPhotos() {
         navigateTo("page12");
