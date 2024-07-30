@@ -15,7 +15,7 @@
     button {
       margin: 0;
       padding: 0;
-      font-family: "Euclid Circular B-Regular", Helvetica, Arial, sans-serif;
+      font-family: "Euclid Circular B";
       line-height: 1.6;
       color: #333;
       overflow-x: hidden;
@@ -187,11 +187,10 @@
     }
 
     .info-text {
-      display: absolute;
+      position: absolute;
       font-size: 14px;
       color: #000;
-      margin-top: 5px;
-      left: 45%
+      padding-left: 45%;
     }
 
     .info-text i {
@@ -485,6 +484,16 @@
     margin-top: 20px;
     text-align: center;
   }
+
+  @font-face {
+    font-family: 'Euclid Circular B';
+    src: local('Euclid Circular B Regular'), local('Euclid-Circular-B-Regular'),
+        url('EuclidCircularB-Regular.woff2') format('woff2'),
+        url('EuclidCircularB-Regular.woff') format('woff'),
+        url('EuclidCircularB-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
     
   </style>
 </head>
@@ -530,7 +539,7 @@
           <div class="stage-number">7</div>
         </div>
       </div>
-
+      
       <div class="info-text">
         Sur l’échelle de Nordwood
         <i class="fas fa-info-circle"></i>
