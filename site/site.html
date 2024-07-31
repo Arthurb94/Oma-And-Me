@@ -10,7 +10,42 @@
     />
     <title>Combined Application</title>
     <style>
-      @import "font/stylesheet.css";
+
+      @font-face {
+        font-family: "Euclid Circular A";
+        font-weight: 600; /* SemiBold */
+        src: url("https://cdn.shopify.com/s/files/1/0232/5961/1200/files/EuclidCircularA-SemiBold.woff2?v=1705988852")
+            format("woff2"),
+          url("https://cdn.shopify.com/s/files/1/0232/5961/1200/files/EuclidCircularA-SemiBold.woff?v=1705988852")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: "Euclid Circular A";
+        font-weight: 400; /* Regular */
+        src: url("https://cdn.shopify.com/s/files/1/0232/5961/1200/files/Replo_Euclid_Circular_A_Regular.woff?v=1700831684")
+            format("woff"),
+          url("https://cdn.shopify.com/s/files/1/0232/5961/1200/files/EuclidCircularA-Regular.woff2?v=1700802461")
+            format("woff2");
+      }
+
+      @font-face {
+        font-family: "Euclid Circular A";
+        font-weight: 700; /* Bold */
+        src: url("https://cdn.shopify.com/s/files/1/0232/5961/1200/files/Replo_Euclid_Circular_A_Bold.woff?v=1700831518")
+            format("woff"),
+          url("https://cdn.shopify.com/s/files/1/0232/5961/1200/files/EuclidCircularA-Bold.woff2?v=1700801025")
+            format("woff2");
+      }
+
+      @font-face {
+        font-family: "Euclid Circular A";
+        font-weight: 500; /* Medium */
+        src: url("https://cdn.shopify.com/s/files/1/0232/5961/1200/files/Replo_Euclid_Circular_A_Medium.woff?v=1700831415")
+            format("woff"),
+          url("https://cdn.shopify.com/s/files/1/0232/5961/1200/files/EuclidCircularA-Medium.woff2?v=1700801905")
+            format("woff2");
+      }
 
       /* Global styles */
       html,
@@ -23,7 +58,7 @@
         color: #333;
         height: 100%;
         overflow-x: hidden;
-        font-family: "Euclid Circular B";
+        font-family: "Euclid Circular A";
       }
 
       body {
@@ -199,7 +234,7 @@
       .photo-container {
         display: flex;
         justify-content: center;
-        align-items: center;
+
         border: 1px solid black;
         width: 350px;
         margin: 0 auto;
@@ -296,33 +331,38 @@
       }
 
       video {
-        width: 100%;
         height: 100%;
-        border-radius: 10px;
-        margin: 1em 0;
+        min-height: 480px;
+        align-items: center;
       }
 
       .video-container {
         position: relative;
         width: 100%;
-        /* max-width: 600px; Ajuster selon les besoins */
-        margin: 0 auto;
-      }
-
-      #videoFront {
-        width: 100%;
-        height: auto; /* Assure que la hauteur est proportionnelle à la largeur */
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
       }
 
       .overlay-image {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 100%;
         height: 100%;
         opacity: 0.5; /* Ajuster l'opacité selon les besoins */
         pointer-events: none; /* Assure que l'image ne gêne pas les contrôles de la vidéo */
         object-fit: cover; /* Assure que l'image couvre tout l'élément sans déformation */
+      }
+
+      /* Style for the preview image */
+      .preview-img {
+        height: 100%; /* Make the image take the full width of its container */
+        width: 100%; /* Maintain aspect ratio */
+        margin-bottom: 10px; /* Space between image and buttons */
       }
 
       /* Photo preview */
@@ -380,7 +420,7 @@
         background-color: #ffffff;
         width: 100%;
         max-width: 390px;
-        min-height: auto;
+        min-height: 570px;
         margin: 0 auto;
         padding: 20px;
       }
@@ -920,9 +960,7 @@
         <div class="collapsible-container">
           <div class="collapsible-header">
             <span class="guide-text">GUIDE DES PHOTOS</span>
-            <button class="collapsible-button" onclick="toggleCollapsible()">
-              +
-            </button>
+            <button class="collapsible-button">+</button>
           </div>
           <div class="collapsible-content">
             <b>
@@ -988,7 +1026,7 @@
           <video id="videoFront" autoplay playsinline></video>
           <canvas id="canvasFront" style="display: none"></canvas>
           <img
-            src="assets/overlay-image-front-top.png"
+            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-front-top.png?v=1722412270"
             class="overlay-image"
             alt="Overlay Image"
           />
@@ -998,19 +1036,15 @@
         </button>
         <canvas id="canvasFront" style="display: none"></canvas>
         <img
+          class="preview-img"
           id="previewFront"
-          style="
-            display: none;
-            width: 100%;
-            border-radius: 5px;
-            margin-bottom: 10px;
-          "
           alt="Front View Preview"
+          style="display: none"
         />
         <button
           id="retakeBtnFront"
           class="retake-btn"
-          onclick="retakePhoto('front', true)"
+          onclick="retakePhoto('front')"
           style="display: none"
         >
           REPRENDRE
@@ -1063,7 +1097,7 @@
           <video id="videoTop" autoplay playsinline></video>
           <canvas id="canvasTop" style="display: none"></canvas>
           <img
-            src="assets/overlay-image-front-top.png"
+            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-front-top.png?v=1722412270"
             class="overlay-image"
             alt="Overlay Image"
           />
@@ -1077,19 +1111,15 @@
         </button>
         <canvas id="canvasTop" style="display: none"></canvas>
         <img
+          class="preview-img"
           id="previewTop"
-          style="
-            display: none;
-            width: 100%;
-            border-radius: 5px;
-            margin-bottom: 10px;
-          "
           alt="Top View Preview"
+          style="display: none"
         />
         <button
           id="retakeBtnTop"
           class="retake-btn"
-          onclick="retakePhoto('top', true)"
+          onclick="retakePhoto('top')"
           style="display: none"
         >
           REPRENDRE
@@ -1143,7 +1173,7 @@
           <video id="videoRight" autoplay playsinline></video>
           <canvas id="canvasRight" style="display: none"></canvas>
           <img
-            src="assets/overlay-image-right-left.png"
+            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-right-left.png?v=1722412196"
             class="overlay-image"
             alt="Overlay Image"
           />
@@ -1157,19 +1187,15 @@
         </button>
         <canvas id="canvasRight" style="display: none"></canvas>
         <img
+          class="preview-img"
           id="previewRight"
-          style="
-            display: none;
-            width: 100%;
-            border-radius: 5px;
-            margin-bottom: 10px;
-          "
           alt="Right View Preview"
+          style="display: none"
         />
         <button
           id="retakeBtnRight"
           class="retake-btn"
-          onclick="retakePhoto('right', true)"
+          onclick="retakePhoto('right')"
           style="display: none"
         >
           REPRENDRE
@@ -1223,7 +1249,7 @@
           <video id="videoLeft" autoplay playsinline></video>
           <canvas id="canvasLeft" style="display: none"></canvas>
           <img
-            src="assets/overlay-image-right-left.png"
+            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-right-left.png?v=1722412196"
             class="overlay-image"
             alt="Overlay Image"
           />
@@ -1237,19 +1263,15 @@
         </button>
         <canvas id="canvasLeft" style="display: none"></canvas>
         <img
+          class="preview-img"
           id="previewLeft"
-          style="
-            display: none;
-            width: 100%;
-            border-radius: 5px;
-            margin-bottom: 10px;
-          "
           alt="Left View Preview"
+          style="display: none"
         />
         <button
           id="retakeBtnLeft"
           class="retake-btn"
-          onclick="retakePhoto('left', true)"
+          onclick="retakePhoto('left')"
           style="display: none"
         >
           REPRENDRE
@@ -1286,6 +1308,7 @@
           <div class="photo-container">
             <b> Angle 1 : vue de face </b>
             <img
+              class="preview-img"
               id="frontViewPreview"
               class="photo"
               src=""
@@ -1302,6 +1325,7 @@
           <div class="photo-container">
             <b> Angle 2 : vue du dessus </b>
             <img
+              class="preview-img"
               id="topViewPreview"
               class="photo"
               src=""
@@ -1318,6 +1342,7 @@
           <div class="photo-container">
             <b> Angle 3 : coté droit </b>
             <img
+              class="preview-img"
               id="rightViewPreview"
               class="photo"
               src=""
@@ -1334,6 +1359,7 @@
           <div class="photo-container">
             <b>Angle 4 : coté gauche</b>
             <img
+              class="preview-img"
               id="leftViewPreview"
               class="photo"
               src=""
@@ -1350,12 +1376,11 @@
         </div>
         <div class="overlay">
           <div id="privacy-overlay" class="overlay-content">
-          <button class="button-group" onclick="sendPhotos()">
-            OBTENIR MON DIAGNOSTIC
-          </button>
+            <button class="button-group" onclick="sendPhotos()">
+              OBTENIR MON DIAGNOSTIC
+            </button>
           </div>
         </div>
-        
       </div>
 
       <!-- Page 12: Loading -->
@@ -1558,6 +1583,7 @@
 
       // Start and capture camera
       function startCapture(view) {
+        console.log(`start capture view: ${view}`);
         const videoElement = document.getElementById(
           `video${capitalize(view)}`
         );
@@ -1578,24 +1604,58 @@
           .getUserMedia({ video: true })
           .then((stream) => {
             videoElement.srcObject = stream;
+            previewElement.style.display = "none";
             videoElement.style.display = "block";
             captureBtn.style.display = "block";
             retakeBtn.style.display = "none";
             confirmBtn.style.display = "none";
+
             captureBtn.onclick = () => {
+              console.log("on clique la ");
               const canvasElement = document.getElementById(
                 `canvas${capitalize(view)}`
               );
+
               const context = canvasElement.getContext("2d");
-              canvasElement.width = videoElement.videoWidth;
-              canvasElement.height = videoElement.videoHeight;
+
+              // Taille finale du canevas
+              const canvasWidth = 390;
+              const canvasHeight = 480;
+
+              // Calcul des dimensions de la zone capturée
+              const videoWidth = videoElement.videoWidth;
+              const videoHeight = videoElement.videoHeight;
+
+              // Calcul des dimensions et des décalages
+              const captureWidth = Math.min(
+                videoWidth,
+                (videoHeight * canvasWidth) / canvasHeight
+              );
+              const captureHeight = Math.min(
+                videoHeight,
+                (videoWidth * canvasHeight) / canvasWidth
+              );
+
+              const offsetX = (videoWidth - captureWidth) / 2;
+              const offsetY = (videoHeight - captureHeight) / 2;
+
+              // Réglage de la taille du canevas
+              canvasElement.width = canvasWidth;
+              canvasElement.height = canvasHeight;
+
+              // Dessiner la partie capturée sur le canevas
               context.drawImage(
                 videoElement,
+                offsetX,
+                offsetY,
+                captureWidth,
+                captureHeight, // Zone à capturer
                 0,
                 0,
-                canvasElement.width,
-                canvasElement.height
+                canvasWidth,
+                canvasHeight // Dimensions du canevas
               );
+
               capturedPhotos[view] = canvasElement.toDataURL("image/jpeg");
 
               // Stop the video stream
@@ -1607,8 +1667,8 @@
               previewElement.src = capturedPhotos[view];
               previewElement.style.display = "block";
               captureBtn.style.display = "none";
-              retakeBtn.style.display = "block";
-              confirmBtn.style.display = "block";
+              retakeBtn.style.display = "flex";
+              confirmBtn.style.display = "flex";
             };
           })
           .catch((error) => {
@@ -1624,30 +1684,30 @@
         left: null,
       };
 
-      function retakePhoto(view) {
-        capturedPhotos[view] = null;
-        startCapture(view);
+      function retakePhoto(view, returnToReviewPage = false) {
+        const confirmBtn = document.getElementById(
+          `confirmBtn${capitalize(view)}`
+        );
+        if (view === "front") navigateTo("page4");
+        if (view === "top") navigateTo("page6");
+        if (view === "right") navigateTo("page8");
+        if (view === "left") navigateTo("page10");
+        console.log("on va jusque la");
+        if (returnToReviewPage) {
+          confirmBtn.onclick = () => {
+            confirmPhoto(view, returnToReviewPage);
+          };
+        }
       }
 
       // Update button onclicks in page 10 to use the new parameter
-      document.querySelector(
-        "button[onclick=\"retakePhoto('front', true)\"]"
-      ).onclick = () => retakePhoto("front", true, true);
-      document.querySelector(
-        "button[onclick=\"retakePhoto('top', true)\"]"
-      ).onclick = () => retakePhoto("top", true, true);
-      document.querySelector(
-        "button[onclick=\"retakePhoto('right', true)\"]"
-      ).onclick = () => retakePhoto("right", true, true);
-      document.querySelector(
-        "button[onclick=\"retakePhoto('left', true)\"]"
-      ).onclick = () => retakePhoto("left", true, true);
 
       function confirmPhoto(view, returnToReviewPage = false) {
+        console.log("on clique la uassi");
         const previewElement = document.getElementById(`${view}ViewPreview`);
         previewElement.src = capturedPhotos[view];
         if (returnToReviewPage) {
-          navigateTo("page10");
+          navigateTo("page11");
         } else {
           if (view === "front") navigateTo("page5");
           if (view === "top") navigateTo("page7");
