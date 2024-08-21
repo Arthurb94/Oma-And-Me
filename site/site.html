@@ -10,7 +10,6 @@
     />
     <title>Combined Application</title>
     <style>
-
       @font-face {
         font-family: "Euclid Circular A";
         font-weight: 600; /* SemiBold */
@@ -55,17 +54,20 @@
         margin: 0;
         padding: 0;
         line-height: 1.6;
-        color: #333;
         height: 100%;
-        overflow-x: hidden;
         font-family: "Euclid Circular A";
+        scroll-behavior: smooth;
       }
 
       body {
         background-color: #ffffff;
         text-align: center;
+        color: #000;
       }
 
+      button {
+        color: #000;
+      }
       /* Container */
       .page {
         display: flex;
@@ -80,6 +82,9 @@
         max-width: 600px;
         width: 100%;
         box-sizing: border-box;
+      }
+      #page12 {
+        background-color: transparent;
       }
 
       .page-title {
@@ -132,11 +137,14 @@
         font-size: 12px;
         line-height: 15px;
         text-align: left;
+        font-weight: normal;
       }
 
       .overlay-content input[type="checkbox"] {
-        margin-right: 10px;
         margin-top: 5px;
+        width: 13px;
+        height: 13px;
+        min-width: 13px;
       }
 
       .text {
@@ -155,34 +163,6 @@
         border-radius: 10px;
         max-width: 600px;
         width: 100%;
-      }
-
-      .progress-container {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        /* background-color: #f1f1f1; */
-        padding: 10px 0;
-        position: flex;
-        width: 100%;
-
-        left: 0;
-      }
-
-      .progress-step {
-        width: 22%;
-        height: 10px;
-        background-color: lightgray;
-        color: black;
-        text-align: center;
-        line-height: 30px;
-        /* border-radius: 5px; */
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      .progress-step.completed {
-        background-color: #dad5c4;
-        color: white;
       }
 
       .collapsible-container {
@@ -212,6 +192,7 @@
         border: none;
         font-size: 20px;
         cursor: pointer;
+        color: #000;
       }
 
       .collapsible-content {
@@ -221,6 +202,7 @@
         text-align: justify;
         font-size: 16px;
         line-height: 20px;
+        font-weight: 400;
       }
 
       .collapsible-content.expanded {
@@ -229,6 +211,22 @@
 
       .collapsed-content {
         margin-bottom: 20px;
+      }
+
+      .bottom-text {
+        display: flex;
+        font-size: 11px;
+        line-height: 14px;
+        font-weight: 400;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      .bottom-text img {
+        width: 20px;
+        height: 26px;
+        margin-bottom: 10px;
       }
 
       .photo-container {
@@ -283,13 +281,13 @@
         margin-top: 1em;
       }
 
-      .privacy-policy a {
-        color: #007bff;
-        text-decoration: none;
+      .privacy-link {
+        color: black; /* Set the text color to black */
+        text-decoration: underline; /* Keep the underline style */
       }
 
-      .privacy-policy a:hover {
-        text-decoration: underline;
+      .privacy-link:hover {
+        color: black; /* Ensure the text color stays black on hover */
       }
 
       /* Photo example */
@@ -331,15 +329,17 @@
       }
 
       video {
-        height: 100%;
-        min-height: 480px;
+        height: 70%;
+        max-height: 480px; /* Ajoutez cette ligne pour fixer une hauteur maximale */
+        width: auto; /* Assurez-vous que la largeur s'ajuste automatiquement */
         align-items: center;
+        transform: scaleX(-1);
       }
 
       .video-container {
         position: relative;
         width: 100%;
-        height: 100%;
+        height: 20%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -363,6 +363,7 @@
         height: 100%; /* Make the image take the full width of its container */
         width: 100%; /* Maintain aspect ratio */
         margin-bottom: 10px; /* Space between image and buttons */
+        transform: scaleX(-1);
       }
 
       /* Photo preview */
@@ -385,14 +386,15 @@
       }
 
       /* Loader */
-      .loader {
-        border: 8px solid #f3f3f3;
-        border-top: 8px solid #007bff;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        animation: spin 2s linear infinite;
-        margin: 0 auto 1em auto;
+      .loader-container {
+        text-align: center;
+        background-color: #f5f1e9;
+      }
+
+      .loader-gif {
+        width: 236px; /* Adjust the size as needed */
+        height: 236px; /* Adjust the size as needed */
+        margin-bottom: 20px;
       }
 
       @keyframes spin {
@@ -429,28 +431,8 @@
         background-color: #ffffff;
         padding-bottom: 100px;
       }
-
-      .status-number {
-        position: absolute;
-        left: 0; /* Aligne à gauche */
-        top: 0; /* Optionnel: Aligne en haut */
-      }
-
-      .status-bar {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 100%;
-        height: 9px;
-        margin: 0px 0px 10px;
-      }
-
-      .status-rectangle {
-        height: 10px;
-        width: 22%;
-        background-color: #dad5c4;
-        margin: 0 2px;
-        transition: background-color 0.3s, color 0.3s;
+      .iphone.custom-bg {
+        background-color: #f5f1e9;
       }
 
       .analysis-result,
@@ -705,7 +687,7 @@
         height: 31px;
         transform: translateY(-50%);
         margin-top: 30px;
-        padding: 0px 10px 0px;
+        margin: 30px 20px 0px 0px;
       }
 
       .analysis-description {
@@ -766,7 +748,7 @@
       .issue-status-img {
         width: 15px;
         height: 15px;
-        padding-right: 5px;
+        margin-right: 5px;
       }
 
       .issue-status {
@@ -865,6 +847,101 @@
         margin-top: 20px;
         text-align: center;
       }
+
+      .info-button {
+        background-color: transparent;
+        border: none;
+        font-size: 24px;
+        color: #007bff; /* Color of the icon */
+        cursor: pointer;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+
+      /* Popup overlay */
+      .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; /* Ensure it's on top of other elements */
+      }
+
+      /* Hide the popup by default */
+      .popup.hidden {
+        display: none;
+      }
+
+      /* Popup content box */
+      .popup-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        position: relative;
+        max-width: 310px;
+        width: 90%;
+      }
+
+      /* Close button */
+      .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .popup-title {
+        text-align: left;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 600;
+        padding-bottom: 10px;
+      }
+
+      .popup-description {
+        text-align: justify;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
+        padding: 5px;
+      }
+
+      .iphone,
+      .desktop {
+        display: none;
+      }
+
+      .desktop {
+        background-color: #ffffff;
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .desktop-page {
+        height: 100%;
+        align-content: center;
+        background: white;
+        border-radius: 10px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .desktop-page .page-title {
+        padding-bottom: 10px;
+      }
+
+      .code-qr {
+        width: 300px;
+      }
     </style>
   </head>
 
@@ -872,12 +949,6 @@
     <div class="iphone">
       <!-- Page 1: Select Gender -->
       <div id="page1" class="page">
-        <div class="progress-container">
-          <div class="progress-step completed"></div>
-          <div class="progress-step"></div>
-          <div class="progress-step"></div>
-          <div class="progress-step"></div>
-        </div>
         <div class="page-title">INFORMATIONS</div>
         <div class="page-subtitle">
           <b>
@@ -887,10 +958,18 @@
         </div>
         <div class="gender-selection">
           <p><b>Vous êtes:</b></p>
-          <button class="gender-btn selected" onclick="selectGender('male')">
+          <button
+            id="male"
+            class="gender-btn selected"
+            onclick="selectGender('male')"
+          >
             <b>UN HOMME</b>
           </button>
-          <button class="gender-btn" onclick="selectGender('female')">
+          <button
+            id="female"
+            class="gender-btn"
+            onclick="selectGender('female')"
+          >
             <b>UNE FEMME</b>
           </button>
         </div>
@@ -904,15 +983,20 @@
               <span class="text">
                 En téléchargeant votre photo dans notre outil d'IA, vous
                 acceptez notre
-                <mark class="underline">Politique de Confidentialité</mark>.
-                Nous utilisons ces photos pour vous fournir une analyse
+                <a
+                  href="https://oma-and-me.com/pages/conditions-generales?_pos=2&_sid=6e622a064&_ss=r"
+                  class="underline privacy-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Politique de Confidentialité</a
+                >. Nous utilisons ces photos pour vous fournir une analyse
                 personnalisée de votre perte de cheveux. Vos données restent
                 totalement confidentielles et vos photos et ne seront pas
                 stockées sur notre serveur.
               </span>
             </label>
             <button id="confirm-button" class="confirm-btn" disabled>
-              Confirmer
+              CONTINUER
             </button>
           </div>
         </div>
@@ -920,12 +1004,6 @@
 
       <!-- Page 2: Photo Instructions (Front View) -->
       <div id="page2" class="page" style="display: none">
-        <div class="progress-container">
-          <div class="progress-step completed"></div>
-          <div class="progress-step completed"></div>
-          <div class="progress-step"></div>
-          <div class="progress-step"></div>
-        </div>
         <div class="page-title">PRENEZ DES PHOTOS</div>
         <div class="page-subtitle">
           <b>
@@ -963,13 +1041,13 @@
             <button class="collapsible-button">+</button>
           </div>
           <div class="collapsible-content">
-            <b>
-              <div class="collapsed-content">
+            <div class="collapsed-content">
+              <b>
                 Nous avons besoin au total de quatre photos pour évaluer votre
                 stade et type de perte de cheveux : de face, du dessus et de
                 chaque côté.
-              </div>
-            </b>
+              </b>
+            </div>
             <div class="collapsed-content">
               Centrez votre visage et votre cuir chevelu dans le cercle à
               l'écran. Assurez-vous que vos cheveux et le sommet de votre tête
@@ -982,19 +1060,18 @@
         <button class="continue-btn" onclick="navigateTo('page3')">
           <b>COMMENCER</b>
         </button>
-        <div class="bottum-text">
+        <div class="bottom-text">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/shield-check.png?v=1722499455"
+            alt="shield checked"
+            class="icon"
+          />
           Les images ne seront à aucun moment stockées sur un serveur.
         </div>
       </div>
 
       <!-- Page 3: Photo Instructions (Front View) -->
       <div id="page3" class="page" style="display: none">
-        <div class="progress-container">
-          <div class="progress-step completed"></div>
-          <div class="progress-step completed"></div>
-          <div class="progress-step"></div>
-          <div class="progress-step"></div>
-        </div>
         <h3>
           <img
             src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/camera.png?v=1721387796"
@@ -1026,7 +1103,7 @@
           <video id="videoFront" autoplay playsinline></video>
           <canvas id="canvasFront" style="display: none"></canvas>
           <img
-            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-front-top.png?v=1722412270"
+            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-front-top_2.png?v=1722511628"
             class="overlay-image"
             alt="Overlay Image"
           />
@@ -1061,12 +1138,6 @@
 
       <!-- Page 5: Photo Instructions (Top View) -->
       <div id="page5" class="page" style="display: none">
-        <div class="progress-container">
-          <div class="progress-step completed"></div>
-          <div class="progress-step completed"></div>
-          <div class="progress-step"></div>
-          <div class="progress-step"></div>
-        </div>
         <h3>
           <img
             src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/camera.png?v=1721387796"
@@ -1097,7 +1168,7 @@
           <video id="videoTop" autoplay playsinline></video>
           <canvas id="canvasTop" style="display: none"></canvas>
           <img
-            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-front-top.png?v=1722412270"
+            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-front-top_2.png?v=1722511628"
             class="overlay-image"
             alt="Overlay Image"
           />
@@ -1136,12 +1207,6 @@
 
       <!-- Page 7: Photo Instructions (Right View) -->
       <div id="page7" class="page" style="display: none">
-        <div class="progress-container">
-          <div class="progress-step completed"></div>
-          <div class="progress-step completed"></div>
-          <div class="progress-step"></div>
-          <div class="progress-step"></div>
-        </div>
         <h3>
           <img
             src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/camera.png?v=1721387796"
@@ -1173,7 +1238,7 @@
           <video id="videoRight" autoplay playsinline></video>
           <canvas id="canvasRight" style="display: none"></canvas>
           <img
-            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-right-left.png?v=1722412196"
+            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-right-left0.png?v=1722513748"
             class="overlay-image"
             alt="Overlay Image"
           />
@@ -1212,12 +1277,6 @@
 
       <!-- Page 9: Photo Instructions (Left View) -->
       <div id="page9" class="page" style="display: none">
-        <div class="progress-container">
-          <div class="progress-step completed"></div>
-          <div class="progress-step completed"></div>
-          <div class="progress-step"></div>
-          <div class="progress-step"></div>
-        </div>
         <h3>
           <img
             src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/camera.png?v=1721387796"
@@ -1249,7 +1308,7 @@
           <video id="videoLeft" autoplay playsinline></video>
           <canvas id="canvasLeft" style="display: none"></canvas>
           <img
-            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-right-left.png?v=1722412196"
+            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/overlay-right-left0.png?v=1722513748"
             class="overlay-image"
             alt="Overlay Image"
           />
@@ -1288,12 +1347,6 @@
 
       <!-- Page 11: Review Photos -->
       <div id="page11" class="page" style="display: none">
-        <div class="progress-container">
-          <div class="progress-step completed"></div>
-          <div class="progress-step completed"></div>
-          <div class="progress-step completed"></div>
-          <div class="progress-step"></div>
-        </div>
         <div class="page-title">VÉRIFIEZ VOS PHOTOS</div>
         <div class="page-subtitle">
           <b> Assurez-vous que vos photos sont correctement prises. </b>
@@ -1385,22 +1438,18 @@
 
       <!-- Page 12: Loading -->
       <div id="page12" class="page" style="display: none">
-        <div class="loader"></div>
-        <h1>Loading, please wait...</h1>
+        <div class="loader-container">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/loading.gif?v=1722425086"
+            alt="Loading"
+            class="loader-gif"
+          />
+          <h3>Analyse des photos en cours</h3>
+        </div>
       </div>
 
       <!-- Page 13: API Results -->
       <div id="page13" class="page" style="display: none">
-        <div class="status-number">4/4</div>
-
-        <div class="status-bar">
-          <!-- TODO: MODIFIER CETTE PARTIE AVEC LA BARRE DE PROGRESSION -->
-          <div class="status-rectangle"></div>
-          <div class="status-rectangle"></div>
-          <div class="status-rectangle"></div>
-          <div class="status-rectangle"></div>
-        </div>
-
         <div class="stage-scale">
           <div class="stage-header">
             <div id="stage-title" class="stage-title"></div>
@@ -1432,8 +1481,26 @@
           </div>
 
           <div class="info-text">
-            Sur l’échelle de Nordwood
-            <i class="fas fa-info-circle"></i>
+            Sur l’échelle de Norwood
+
+            <i id="infoButton" class="fas fa-info-circle"></i>
+          </div>
+        </div>
+        <div id="popup" class="popup hidden">
+          <div class="popup-content">
+            <span class="popup-close" id="popupClose">&times;</span>
+            <div class="popup-title">L'échelle de Norwood</div>
+            <div class="popup-description">
+              <b>
+                C’est un outil médical utilisé pour classifier les différents
+                stades de la calvitie.
+              </b>
+            </div>
+            <div class="popup-description">
+              Elle comporte plusieurs niveaux, allant de l'absence de perte de
+              cheveux (stade 1) à une calvitie complète (stade 7), permettant de
+              suivre et de mesurer l'évolution de la perte de cheveux.
+            </div>
           </div>
         </div>
 
@@ -1490,14 +1557,14 @@
             <img
               id="analysis-ellipse-img"
               class="analysis-ellipse-img"
-              src="img/ellipse-3-2.svg"
+              src=""
             />
             <div id="analysis-result" class="analysis-result"></div>
           </div>
           <div id="analysis-description" class="analysis-description"></div>
         </div>
 
-        <div id="issue" class="content-div" style="display: none">
+        <div id="issue" class="content-div">
           <div class="issues-title">ENJEUX</div>
           <ul>
             <li id="subtitle1" class="p">Sous-titre 1</li>
@@ -1517,7 +1584,7 @@
           </div>
         </div>
 
-        <div id="solution" class="content-div" style="display: none">
+        <div id="solution" class="content-div">
           <div class="solution-title">SOLUTION</div>
           <div id="solution-subtitle" class="solution-subtitle"></div>
           <p id="solution-description" class="solution-description"></p>
@@ -1543,16 +1610,48 @@
               <p id="arg3" class="arg"></p>
             </div>
           </div>
-          <div id="button-text" class="redirect-button"></div>
+          <a
+            id="button-text"
+            class="redirect-button"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="text-decoration: none"
+          ></a>
           <p id="condition" class="condition"></p>
         </div>
       </div>
     </div>
+    <div class="desktop">
+      <div class="desktop-page">
+        <div class="page-title">
+          NOTRE DIAGNOSTIC IA EST DISPONIBLE UNIQUEMENT VIA VOTRE TÉLÉPHONE
+        </div>
+        <div class="page-subtitle">
+          <b>
+            Vous pouvez scanner ce QR code directement avec votre téléphone pour
+            y accéder
+          </b>
+        </div>
+      </div>
+      <img
+        class="code-qr"
+        src="https://cdn.shopify.com/s/files/1/0232/5961/1200/files/desktop-code-qr.jpg?v=1722586942"
+      />
+    </div>
     <script>
+      function showDivBasedOnDevice() {
+        if (window.innerWidth <= 768) {
+          // Typical breakpoint for mobile devices
+          document.querySelector(".iphone").style.display = "block";
+        } else {
+          document.querySelector(".desktop").style.display = "block";
+        }
+      }
+
       // Navigation logic
       function navigateTo(pageId) {
         const pages = document.querySelectorAll(".page");
-        const steps = document.querySelectorAll(".progress-step");
+        const iphoneElement = document.querySelector(".iphone");
 
         pages.forEach((page) => (page.style.display = "none"));
         document.getElementById(pageId).style.display = "flex";
@@ -1571,19 +1670,26 @@
         } else if (pageId === "page10") {
           startCapture("left");
         }
+
+        if (pageId === "page12") {
+          iphoneElement.classList.add("custom-bg");
+        } else {
+          iphoneElement.classList.remove("custom-bg");
+        }
       }
 
       // Gender selection logic
       let selectedGender = "";
 
       function selectGender(gender) {
-        selectedGender = gender;
-        navigateTo("page2");
+        document.getElementById("male").classList.remove("selected");
+        document.getElementById("female").classList.remove("selected");
+
+        document.getElementById(gender).classList.add("selected");
       }
 
       // Start and capture camera
       function startCapture(view) {
-        console.log(`start capture view: ${view}`);
         const videoElement = document.getElementById(
           `video${capitalize(view)}`
         );
@@ -1611,7 +1717,6 @@
             confirmBtn.style.display = "none";
 
             captureBtn.onclick = () => {
-              console.log("on clique la ");
               const canvasElement = document.getElementById(
                 `canvas${capitalize(view)}`
               );
@@ -1692,7 +1797,7 @@
         if (view === "top") navigateTo("page6");
         if (view === "right") navigateTo("page8");
         if (view === "left") navigateTo("page10");
-        console.log("on va jusque la");
+
         if (returnToReviewPage) {
           confirmBtn.onclick = () => {
             confirmPhoto(view, returnToReviewPage);
@@ -1703,7 +1808,6 @@
       // Update button onclicks in page 10 to use the new parameter
 
       function confirmPhoto(view, returnToReviewPage = false) {
-        console.log("on clique la uassi");
         const previewElement = document.getElementById(`${view}ViewPreview`);
         previewElement.src = capturedPhotos[view];
         if (returnToReviewPage) {
@@ -1716,17 +1820,11 @@
         }
       }
 
-      // Update confirm button onclicks to include returnToReviewPage parameter
-      // document.getElementById("confirmBtnFront").onclick = () =>
-      //   confirmPhoto("front", true);
-      // document.getElementById("confirmBtnTop").onclick = () =>
-      //   confirmPhoto("top", true);
-      // document.getElementById("confirmBtnRight").onclick = () =>
-      //   confirmPhoto("right", true);
-      // document.getElementById("confirmBtnLeft").onclick = () =>
-      //   confirmPhoto("left", true);
-
       function sendPhotos() {
+        setTimeout(() => {
+          document.body.scrollTop = 0; // For Safari
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+        }, 100);
         navigateTo("page12");
         const frontViewPhoto = capturedPhotos.front;
         const topViewPhoto = capturedPhotos.top;
@@ -1734,34 +1832,44 @@
       }
 
       async function fetchApiData(frontViewPhoto, topViewPhoto) {
-        try {
-          const response = await fetch(
-            "https://tv1wdm122i.execute-api.eu-west-3.amazonaws.com/default/oma",
-            {
-              method: "POST",
-              headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                file_front: frontViewPhoto.split(",")[1],
-                file_top: topViewPhoto.split(",")[1],
-              }),
+        const maxRetries = 3; // Nombre maximum de tentatives
+        let attempt = 0;
+        let success = false;
+
+        while (attempt < maxRetries && !success) {
+          try {
+            const response = await fetch(
+              "https://tv1wdm122i.execute-api.eu-west-3.amazonaws.com/default/oma",
+              {
+                method: "POST",
+                headers: {
+                  "Access-Control-Allow-Origin": "*",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  file_front: frontViewPhoto.split(",")[1],
+                  file_top: topViewPhoto.split(",")[1],
+                }),
+              }
+            );
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
             }
-          );
 
-          if (!response.ok) {
-            throw new Error("HTTP error! Status: ${response.status}");
+            const data = await response.json();
+            // Store the result in local storage
+            localStorage.setItem("result", JSON.stringify(data));
+            displayResult(data.nordwood_scale);
+            navigateTo("page13");
+            success = true; // La requête a réussi, on sort de la boucle
+          } catch (error) {
+            attempt++;
+            if (attempt >= maxRetries) {
+              // Si on atteint le nombre maximum de tentatives, on affiche l'erreur
+              localStorage.setItem("result", `Error: ${error.message}`);
+            }
           }
-
-          const data = await response.json();
-          console.log(data);
-          // Store the result in local storage
-          localStorage.setItem("result", JSON.stringify(data));
-          displayResult(data.nordwood_scale);
-          navigateTo("page13");
-        } catch (error) {
-          localStorage.setItem("result", "Error: ${error.message}");
         }
       }
 
@@ -1895,6 +2003,8 @@
             arg2: "<b>Résultats visibles en seulement 90 jours :</b> Augmentation de la repousse de +78% et baisse de la chute des cheveux de 28%",
             arg3: "<b>Garantie Satisfait ou Remboursé</b> Si aucun résultat en 90 jours",
             buttonText: "DÉCOUVRIR LE PRODUIT",
+            buttonLink:
+              "https://oma-and-me.com/pages/chute-cheveux-repousse-homme",
             condition: "",
           },
           {
@@ -1906,6 +2016,8 @@
             arg2: "<b>Résultats visibles en seulement 90 jours :</b> Augmentation de la repousse de +78% et baisse de la chute des cheveux de 28%",
             arg3: "<b>Garantie Satisfait ou Remboursé</b> Si aucun résultat en 90 jours",
             buttonText: "DÉCOUVRIR LE PRODUIT",
+            buttonLink:
+              "https://oma-and-me.com/pages/chute-cheveux-repousse-homme",
             condition: "",
           },
           {
@@ -1917,6 +2029,8 @@
             arg2: "<b>Résultats visibles en seulement 90 jours :</b> Augmentation de la repousse de +78% et baisse de la chute des cheveux de 28%",
             arg3: "<b>Garantie Satisfait ou Remboursé</b> Si aucun résultat en 90 jours",
             buttonText: "DÉCOUVRIR LE PRODUIT",
+            buttonLink:
+              "https://oma-and-me.com/pages/chute-cheveux-repousse-homme",
             condition: "",
           },
           {
@@ -1928,6 +2042,8 @@
             arg2: "<b>Résultats visibles en seulement 90 jours :</b> Augmentation de la repousse de +78% et baisse de la chute des cheveux de 28%",
             arg3: "<b>Garantie Satisfait ou Remboursé</b> Si aucun résultat en 90 jours",
             buttonText: "DÉCOUVRIR LE PRODUIT",
+            buttonLink:
+              "https://oma-and-me.com/pages/chute-cheveux-repousse-homme",
             condition: "",
           },
           {
@@ -1938,6 +2054,8 @@
             arg2: "<b>Solution permanente :</b> optez pour une solution permanente pour combattre l'alopécie et retrouver votre chevelure originelle.",
             arg3: "<b>Besoin d’information sur la greffe capillaire ?</b> Nous vous proposons de prendre rendez-vous avec l’une de nos cliniques partenaires.",
             buttonText: "DEMANDE D'INFORMATIONS",
+            buttonLink:
+              "https://centre-racine2.com/greffe/greffe-de-cheveux-hommes/",
             condition:
               "<i>* OMA & ME est susceptible de recevoir une rémunération de la part de la clinique partenaire.</i>",
           },
@@ -1949,6 +2067,8 @@
             arg2: "<b>Solution permanente :</b> optez pour une solution permanente pour combattre l'alopécie et retrouver votre chevelure originelle.",
             arg3: "<b>Besoin d’information sur la greffe capillaire ?</b> Nous vous proposons de prendre rendez-vous avec l’une de nos cliniques partenaires.",
             buttonText: "DEMANDE D'INFORMATIONS",
+            buttonLink:
+              "https://centre-racine2.com/greffe/greffe-de-cheveux-hommes/",
             condition:
               "<i>* OMA & ME est susceptible de recevoir une rémunération de la part de la clinique partenaire.</i>",
           },
@@ -1960,6 +2080,8 @@
             arg2: "<b>Solution permanente :</b> optez pour une solution permanente pour combattre l'alopécie et retrouver votre chevelure originelle.",
             arg3: "<b>Besoin d’information sur la greffe capillaire ?</b> Nous vous proposons de prendre rendez-vous avec l’une de nos cliniques partenaires.",
             buttonText: "DEMANDE D'INFORMATIONS",
+            buttonLink:
+              "https://centre-racine2.com/greffe/greffe-de-cheveux-hommes/",
             condition:
               "<i>* OMA & ME est susceptible de recevoir une rémunération de la part de la clinique partenaire.</i>",
           },
@@ -1996,6 +2118,7 @@
         document.getElementById("arg2").innerHTML = solution.arg2;
         document.getElementById("arg3").innerHTML = solution.arg3;
         document.getElementById("button-text").innerHTML = solution.buttonText;
+        document.getElementById("button-text").href = solution.buttonLink;
         document.getElementById("condition").innerHTML = solution.condition;
 
         updateBarColors(result);
@@ -2004,11 +2127,7 @@
 
       function showText(id) {
         // Masquer toutes les divs de texte
-        const texts = document.querySelectorAll(".content-div");
-        texts.forEach((text) => (text.style.display = "none"));
-
-        // Afficher la div avec l'id spécifié
-        document.getElementById(id).style.display = "block";
+        const sectionElement = document.getElementById(`${id}`);
 
         // Sélectionner tous les boutons
         const buttons = document.querySelectorAll(".button-item button");
@@ -2022,6 +2141,9 @@
         );
         if (clickedButton) {
           clickedButton.classList.add("active");
+        }
+        if (sectionElement) {
+          sectionElement.scrollIntoView({ behavior: "smooth" });
         }
       }
 
@@ -2087,13 +2209,17 @@
         return string.charAt(0).toUpperCase() + string.slice(1);
       }
 
-      window.addEventListener("load", () => {
-        const result = localStorage.getItem("result");
-        if (result) {
-          document.getElementById("result").value = result;
-          localStorage.removeItem("result");
-        }
-      });
+      function togglePopup() {
+        const popup = document.getElementById("popup");
+        popup.classList.toggle("hidden");
+      }
+
+      document
+        .getElementById("infoButton")
+        .addEventListener("click", togglePopup);
+      document
+        .getElementById("popupClose")
+        .addEventListener("click", togglePopup);
 
       document.addEventListener("DOMContentLoaded", () => {
         navigateTo("page1"); // Initialiser sur la première page
@@ -2122,7 +2248,7 @@
 
         confirmButton.addEventListener("click", function () {
           if (checkbox.checked) {
-            document.getElementById("privacy-overlay").style.display = "none";
+            navigateTo("page2");
           }
         });
 
@@ -2132,12 +2258,8 @@
           ".collapsible-content"
         );
 
-        console.log("Collapsible Button:", collapsibleButton);
-        console.log("Collapsible Content:", collapsibleContent);
-
         if (collapsibleButton && collapsibleContent) {
           collapsibleButton.addEventListener("click", () => {
-            console.log("Button Clicked");
             if (collapsibleContent.style.display === "block") {
               collapsibleContent.style.display = "none";
               collapsibleButton.textContent = "+";
@@ -2158,6 +2280,8 @@
           }
         });
       });
+
+      window.onload = showDivBasedOnDevice;
     </script>
   </body>
 </html>
